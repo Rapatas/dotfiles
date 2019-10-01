@@ -1,0 +1,111 @@
+snippet basic "Simple main.cpp"
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+	cout << "Hello, world!" << '\n';
+
+	return 0;
+}
+endsnippet
+
+snippet fr "for (size_t i = ...)"
+for (size_t $1 = 0; $1 != $2; ++$1)
+{
+	$3
+}
+endsnippet
+
+snippet fra "range for (const auto & : ...)"
+for (const auto &$1 : $2)
+{
+	$3
+}
+endsnippet
+
+snippet enum "enum class {...}"
+enum class $1 {$2};
+endsnippet
+
+snippet st "size_t"
+size_t
+endsnippet
+
+snippet class "Standard issue class"
+class $1 $2
+{
+public:
+
+	explicit $1();
+	virtual ~$1();
+
+private:
+
+	$3
+};
+endsnippet
+
+snippet struct "Standard issue struct"
+struct $1
+{
+	$2
+};
+endsnippet
+
+snippet arr "std::array<,>" i
+std::array<$1, $2>$3
+endsnippet
+
+snippet vec "std::vector<>" i
+std::vector<$1>$2
+endsnippet
+
+snippet map "std::map<,>" i
+std::map<$1, $2>$3
+endsnippet
+
+snippet str "std::string" i
+std::string
+endsnippet
+
+snippet cor "const &" i
+const $1 &$2
+endsnippet
+
+snippet fun "std::function<>" i
+std::function<$1($2)>
+endsnippet
+
+snippet sha "std::shared_ptr<>" i
+std::shared_ptr<$1>$2
+endsnippet
+
+snippet uni "std::unique_ptr<>" i
+std::unique_ptr<$1>$2
+endsnippet
+
+snippet uns "using namespace" i
+using namespace $1;
+endsnippet
+
+snippet unj "using json" i
+using json = nlohmann::json;
+endsnippet
+
+snippet unss "using namespace std;" i
+using namespace std;
+endsnippet
+
+snippet jsn "nlohmann::json" i
+nlohmann::json
+endsnippet
+
+snippet sec "Section" i
+// $1 {
+
+$2
+
+// $1 }
+endsnippet

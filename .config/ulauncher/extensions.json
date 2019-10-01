@@ -1,0 +1,100 @@
+{
+    "com.github.friday.ulauncher-clipboard": {
+        "url": "https://github.com/friday/ulauncher-clipboard", 
+        "last_commit_time": "2019-06-19T00:24:28", 
+        "last_commit": "c3141d4606d7a2dbe12e0bb085489ad3c062beb5", 
+        "id": "com.github.friday.ulauncher-clipboard", 
+        "updated_at": "2019-09-29T09:23:55.221892"
+    }, 
+    "com.github.noam09.ulauncher-units": {
+        "url": "https://github.com/noam09/ulauncher-units", 
+        "last_commit_time": "2018-09-06T11:26:32", 
+        "last_commit": "806482d689d1b02767df2ef78c5803d1e439d4d0", 
+        "id": "com.github.noam09.ulauncher-units", 
+        "updated_at": "2019-09-29T09:23:58.518336"
+    }, 
+    "com.github.pywkm.ulauncher-spotify": {
+        "url": "https://github.com/pywkm/ulauncher-spotify", 
+        "last_commit_time": "2019-05-05T12:04:30", 
+        "last_commit": "e0dfe24e2cc49109d255725c13aab39b78e34bc0", 
+        "id": "com.github.pywkm.ulauncher-spotify", 
+        "updated_at": "2019-09-29T09:24:01.408707"
+    }, 
+    "com.github.yegorf1.ulauncher-translator": {
+        "url": "https://github.com/yegorf1/ulauncher-translator", 
+        "last_commit_time": "2018-08-26T23:21:25", 
+        "last_commit": "c80a4bc3ecdbd559f79b08c3b7c118663610f5b0", 
+        "id": "com.github.yegorf1.ulauncher-translator", 
+        "updated_at": "2019-09-29T09:24:05.115289"
+    }, 
+    "com.github.compilelife.ulauncher-searchfile": {
+        "url": "https://github.com/compilelife/ulauncher-searchfile", 
+        "last_commit_time": "2018-07-31T01:15:44", 
+        "last_commit": "af69a3f041c20cf3d07368e35da63ae35fc3dc74", 
+        "id": "com.github.compilelife.ulauncher-searchfile", 
+        "updated_at": "2019-09-29T09:24:08.394012"
+    }, 
+    "com.github.rolfkoenders.ulauncher-myip": {
+        "url": "https://github.com/RolfKoenders/ulauncher-myip", 
+        "last_commit_time": "2017-12-06T23:01:27", 
+        "last_commit": "f40929056c53d7bd866e3825b9b98b4955f82121", 
+        "id": "com.github.rolfkoenders.ulauncher-myip", 
+        "updated_at": "2019-09-29T09:24:11.155033"
+    }, 
+    "com.github.sandler31.ulauncher-local-listeners": {
+        "url": "https://github.com/sandler31/ulauncher-local-listeners", 
+        "last_commit_time": "2019-06-30T10:12:58", 
+        "last_commit": "87ed56534bb8eeb8f5848d19477c258b223d1fe6", 
+        "id": "com.github.sandler31.ulauncher-local-listeners", 
+        "updated_at": "2019-09-29T09:24:14.186551"
+    }, 
+    "com.github.brpaz.ulauncher-github": {
+        "url": "https://github.com/brpaz/ulauncher-github", 
+        "last_commit_time": "2019-01-19T09:50:20", 
+        "last_commit": "094b0906c4a620aa9c6ef65b62a44c205977134f", 
+        "id": "com.github.brpaz.ulauncher-github", 
+        "updated_at": "2019-09-29T09:24:20.216286"
+    }, 
+    "com.github.diogox.ulauncher-opensubtitles": {
+        "url": "https://github.com/diogox/ulauncher-opensubtitles", 
+        "last_commit_time": "2018-08-30T13:06:22", 
+        "last_commit": "c4d6df45d9af1d0085233f9a53d70cd8152e18a4", 
+        "id": "com.github.diogox.ulauncher-opensubtitles", 
+        "updated_at": "2019-09-29T09:24:33.994422"
+    }, 
+    "com.github.kstenschke.ulauncher-lockcinnamon": {
+        "url": "https://github.com/kstenschke/ulauncher-lockcinnamon", 
+        "last_commit_time": "2018-10-03T19:20:58", 
+        "last_commit": "9ee24a4638080bf302ec264085cd7699163e70c4", 
+        "id": "com.github.kstenschke.ulauncher-lockcinnamon", 
+        "updated_at": "2019-09-29T09:24:36.943491"
+    }, 
+    "com.github.brpaz.ulauncher-lipsum": {
+        "url": "https://github.com/brpaz/ulauncher-lipsum", 
+        "last_commit_time": "2018-09-20T18:50:58", 
+        "last_commit": "d3501f68d7b45f2f7c4bcd41ddc795634439cc2e", 
+        "id": "com.github.brpaz.ulauncher-lipsum", 
+        "updated_at": "2019-05-04T19:27:26.084768"
+    }, 
+    "com.github.brpaz.ulauncher-file-search": {
+        "url": "https://github.com/brpaz/ulauncher-file-search", 
+        "last_commit_time": "2019-01-06T20:13:25", 
+        "last_commit": "1d5c7327d972b2542b034693e2b1f5d625bc9b2a", 
+        "id": "com.github.brpaz.ulauncher-file-search", 
+        "updated_at": "2019-09-29T09:24:43.242458"
+    }, 
+    "com.github.leinardi.ulauncher-systemctl": {
+        "url": "https://github.com/leinardi/ulauncher-systemctl", 
+        "last_commit_time": "2018-02-19T20:20:15", 
+        "last_commit": "0a8cbcba05f70b7607c61608cc3eb78d0757585a", 
+        "id": "com.github.leinardi.ulauncher-systemctl", 
+        "updated_at": "2019-09-29T09:24:46.015627"
+    }, 
+    "com.github.ulauncher.ulauncher-emoji": {
+        "url": "https://github.com/Ulauncher/ulauncher-emoji", 
+        "last_commit_time": "2019-02-11T08:21:07", 
+        "last_commit": "915832789c64e550ecc86409367b5b90ec14ef9f", 
+        "id": "com.github.ulauncher.ulauncher-emoji", 
+        "updated_at": "2019-09-29T09:24:56.566958"
+    }
+}

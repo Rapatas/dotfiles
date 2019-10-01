@@ -1,0 +1,137 @@
+# Configs {
+
+  # Show ISO timestamps on history
+  HISTTIMEFORMAT="%FT%T "
+  # Eternal bash history.
+  export HISTFILESIZE=
+  export HISTSIZE=
+  export HISTTIMEFORMAT="[%F %T] "
+  # Change the file location because certain bash sessions truncate .bash_history file upon close.
+  export HISTFILE=~/.bash_eternal_history
+  # Force prompt to write history after every command.
+  PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+  # When the shell exits, append to the history file instead of overwriting it
+  shopt -s histappend
+
+  # Disable ctrl-s and ctrl-q.
+  stty -ixon
+
+  # Allows you to cd into directory just by typing the directory name
+  shopt -s autocd
+
+  # Enable vim mode
+  set -o vi
+
+  # Fix C-L when vi mode is enabled
+  bind -m vi-insert "\C-l":clear-screen
+
+  # Activate thefuck
+  eval $(thefuck --alias)
+
+  # Set ls colors
+  eval $(dircolors -b $HOME/.dotfiles/ls-colors)
+
+# }
+
+# Functions {
+
+  function text_color {
+    echo "\[\e[38;5;""$1""m\]"
+  }
+
+  function text_bold {
+    echo "\[\e[1m\]"
+  }
+
+  function text_normal {
+    echo "\[\e[0m\]"
+  }
+
+  function text_reset {
+    echo "\[\e[0m\]\[\e[39m\]"
+  }
+
+  function parse_git_branch {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+  }
+
+# }
+
+# Aliases {
+
+  # Speed {
+
+    # Perma args
+    alias mkd='mkdir -pv'
+    alias dirs='dirs -v'
+    alias la='ls --group-directories-first --color -lAlshN'
+    alias ls='ls --group-directories-first --color -lhN'
+    alias tree='tree --dirsfirst -I build --noreport'
+
+    # ranger quits to current dir
+    alias ranger='ranger --choosedir=$HOME/.config/ranger/lastrangerdir; LASTDIR=`cat $HOME/.config/ranger/lastrangerdir`; cd "$LASTDIR"'
+
+    # Small
+    alias v='vim'
+    alias t='tmux'
+    alias r='ranger'
+    alias sv='sudo vim'
+    alias sr='sudo ranger'
+    alias ta='tmux --attach'
+    alias tat='tmux --attach -t'
+
+    # New
+    alias ..='cd ..'
+    alias rmf='rm -rf'
+    alias bld='cd build && cmake .. && make'
+    alias plz='sudo !!'
+    alias csv='column -s , -t'
+    alias delempty='find . -type d -empty -delete'
+    alias hat='highlight --out-format=ansi --force'
+    alias wip="ip a | grep -E 'inet.*lobal' | awk '{print $2}'"
+
+  # }
+
+  # Git {
+
+    alias gp='git pull'
+    alias ga='git add'
+    alias gc='git commit -m'
+    alias gca='git commit --amend'
+    alias gd='git diff'
+    alias gdc='git diff --cached'
+    alias gs='git status'
+    alias gl="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    alias gss='git stash save'
+    alias gsp='git stash pop'
+    alias gsa='git stash apply'
+    alias gssk='git stash save --keep-index'
+
+  # }
+
+  # Dotfiles {
+
+    alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
+    alias dfa='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME add -f'
+    alias dfs='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME status'
+    alias dfc='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME commit -m'
+    alias dfd='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME diff'
+
+  # }
+
+# }
+
+# export PS1 {
+
+  BOLD=`text_bold`
+  RESET=`text_reset`
+
+  GREEN="`text_color 46`"
+  DARK_GREEN="`text_color 34`"
+  ORANGE="`text_color 214`"
+  WHITE="`text_color 15`"
+  CYAN="`text_color 6`"
+
+  export PS1="$BOLD$GREEN\u$WHITE at $CYAN\h$WHITE in $ORANGE\w$RESET$DARK_GREEN\$(parse_git_branch)\n$WHITE$BOLD\$$RESET "
+
+# }

@@ -1,0 +1,87 @@
+snippet maina "Simple main function and args"
+int main(int argc, char *argv[], char *envp[])
+{
+	$1
+
+	return 0;
+}
+endsnippet
+
+snippet main "Simple main function"
+int main()
+{
+	$1
+
+	return 0;
+}
+endsnippet
+
+
+snippet basicc "Simple main.cpp"
+#include <stdio.h>
+
+int main()
+{
+	printf("Hello, world!");
+
+	return 0;
+}
+endsnippet
+
+snippet inc "include <>"
+#include <$1>$2
+endsnippet
+
+snippet inq "include ''"
+#include "$1"$2
+endsnippet
+
+snippet frc "for (i = ...)"
+unsigned int $1 = 0;
+for ($1 = 0; $1 != $2; $1++)
+{
+	$3
+}
+endsnippet
+
+snippet if "if (...) {...}"
+if ($1)
+{
+	$2
+}
+endsnippet
+
+snippet else "else {}"
+
+else
+{
+}
+endsnippet
+
+snippet elif "else if (...) {...}"
+else if ($1)
+{
+	$2
+}
+endsnippet
+
+snippet struct "Standard issue struct"
+typedef structc
+{
+	$2
+} $1;
+endsnippet
+
+snippet once "Header guard"
+#ifndef $1
+#define $1
+
+$2
+
+#endif // $1
+endsnippet
+
+snippet co "const" i
+const $1
+endsnippet
+

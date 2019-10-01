@@ -1,0 +1,169 @@
+set        background=dark
+highlight clear
+if exists("syntax_on")
+    syntax reset
+endif
+
+let g:colors_name="mycol"
+
+let g:symbols  = ' ctermfg = 254 '
+let g:literals = ' ctermfg = 214 '
+let g:preproc  = ' ctermfg = 34 '
+let g:types    = ' ctermfg = 6 cterm = bold '
+let g:function = ' ctermfg = 39 '
+let g:class    = ' ctermfg = 46 '
+
+" Bits
+hi Character    ctermfg=214
+hi EnumConstant ctermfg=9
+hi Error        ctermfg=9
+hi Float        ctermfg=6 cterm=bold
+hi Function     ctermfg=20
+hi Label        ctermfg=6 cterm=bold
+
+hi Macro        ctermfg=28
+hi Member       ctermfg=46
+hi Namespace    ctermfg=6 cterm=bold
+
+hi Number       ctermfg=214
+hi String       ctermfg=214
+hi Type         ctermfg=6 cterm=bold
+hi Variable     ctermfg=46
+
+" Editor settings
+hi Normal           ctermfg=46   ctermbg=none cterm=none
+hi Cursor           ctermfg=200  ctermbg=none cterm=none
+hi CursorLine       ctermfg=none ctermbg=235  cterm=none
+hi LineNr           ctermfg=244  ctermbg=none cterm=none
+hi CursorLineNR     ctermfg=255  ctermbg=none cterm=none
+
+" Number column
+hi CursorColumn     ctermfg=none ctermbg=202   cterm=none
+hi FoldColumn       ctermfg=none ctermbg=237  cterm=none
+hi SignColumn       ctermfg=none ctermbg=202   cterm=none
+hi Folded           ctermfg=none ctermbg=none cterm=none
+
+" Window/Tab delimiters
+hi VertSplit        ctermfg=240  ctermbg=none cterm=none
+hi ColorColumn      ctermfg=none ctermbg=235  cterm=none
+hi TabLine          ctermfg=0    ctermbg=255  cterm=none
+hi TabLineFill      ctermfg=7    ctermbg=none cterm=none
+hi TabLineSel       ctermfg=7    ctermbg=255  cterm=bold
+
+" File Navigation / Searching
+hi Directory        ctermfg=none ctermbg=none cterm=none
+hi Search           ctermfg=none ctermbg=3    cterm=none
+hi IncSearch        ctermfg=none ctermbg=none cterm=none
+
+" Prompt/Status
+hi StatusLine       ctermfg=255  ctermbg=237  cterm=bold
+hi StatusLineNC     ctermfg=232  ctermbg=65   cterm=bold
+hi WildMenu         ctermfg=none ctermbg=none cterm=none
+hi Question         ctermfg=226  ctermbg=none cterm=none
+hi Title            ctermfg=6    ctermbg=none cterm=bold
+hi ModeMsg          ctermfg=none ctermbg=none cterm=none
+hi MoreMsg          ctermfg=none ctermbg=none cterm=none
+
+" Visual aid
+hi MatchParen       ctermfg=46   ctermbg=NONE cterm=none
+hi Visual           ctermfg=0    ctermbg=255  cterm=none
+hi VisualNOS        ctermfg=none ctermbg=none cterm=none
+hi NonText          ctermfg=none ctermbg=none cterm=none
+
+hi Todo             ctermfg=none ctermbg=none cterm=none
+hi Underlined       ctermfg=none ctermbg=none cterm=none
+hi Error            ctermfg=254  ctermbg=202  cterm=bold
+hi ErrorMsg         ctermfg=202  ctermbg=226  cterm=none
+hi WarningMsg       ctermfg=none ctermbg=none cterm=none
+hi Ignore           ctermfg=none ctermbg=none cterm=none
+hi SpecialKey       ctermfg=238  ctermbg=none cterm=none
+
+" Variable types
+hi Constant         ctermfg=none ctermbg=none cterm=none
+hi StringDelimiter  ctermfg=none ctermbg=none cterm=none
+execute 'hi String '    . g:literals
+execute 'hi Character ' . g:literals
+execute 'hi Number '    . g:literals
+execute 'hi Float '     . g:literals
+execute 'hi Boolean '   . g:types
+
+hi Identifier       ctermfg=255  ctermbg=none cterm=none
+execute 'hi Function ' . g:function
+
+" Language constructs
+execute 'hi htmlString ' . g:literals
+execute 'hi Label '      . g:literals
+execute 'hi Keyword '    . g:literals
+execute 'hi Repeat       ' . g:types
+execute 'hi Conditional       ' . g:types
+execute 'hi Statement       ' . g:types
+hi htmlTagName      ctermfg=39   ctermbg=none cterm=bold
+hi Operator         ctermfg=255  ctermbg=none cterm=none
+hi Exception        ctermfg=88   ctermbg=none cterm=none
+hi Comment          ctermfg=33  ctermbg=none cterm=none
+
+hi Special          ctermfg=216  ctermbg=none cterm=none
+hi SpecialChar      ctermfg=216  ctermbg=none cterm=none
+hi Tag              ctermfg=none ctermbg=none cterm=none
+hi Delimiter        ctermfg=255  ctermbg=none cterm=none
+hi SpecialComment   ctermfg=216  ctermbg=none cterm=none
+hi Debug            ctermfg=none ctermbg=none cterm=none
+
+" C like
+execute 'hi PreProc      '  . g:preproc
+execute 'hi Include      '  . g:preproc
+execute 'hi Define       '  . g:preproc
+execute 'hi Macro        '  . g:preproc
+execute 'hi PreCondit    '  . g:preproc
+execute 'hi Type          ' . g:types
+execute 'hi StorageClass  ' . g:types
+execute 'hi Structure     ' . g:types
+execute 'hi Typedef       ' . g:types
+
+" Diff
+hi DiffAdd          ctermfg=none ctermbg=22   cterm=none
+hi DiffChange       ctermfg=none ctermbg=18   cterm=none
+hi DiffDelete       ctermfg=202   ctermbg=52   cterm=none
+hi DiffText         ctermfg=none ctermbg=136  cterm=none
+
+" Completion menu
+hi Pmenu            ctermfg=240  ctermbg=235  cterm=none
+hi PmenuSel         ctermfg=235  ctermbg=240  cterm=bold
+hi PmenuSbar        ctermfg=none ctermbg=233  cterm=none
+hi PmenuThumb       ctermfg=none ctermbg=240  cterm=none
+
+" Spelling
+hi SpellBad         ctermfg=none ctermbg=none cterm=underline
+hi SpellCap         ctermfg=none ctermbg=none cterm=none
+hi SpellLocal       ctermfg=none ctermbg=none cterm=none
+hi SpellRare        ctermfg=none ctermbg=none cterm=none
+
+" Specific settings
+hi cParen     ctermfg=46 ctermbg=none cterm=none
+execute 'hi cLabel       '    .g:types
+execute 'hi cCustomClass      '.g:class
+execute 'hi cCustomScope '    .g:symbols
+execute 'hi ControlSymbols '  .g:symbols
+execute 'hi AccessSymbols '   .g:symbols
+execute 'hi AllSymbols '      .g:symbols
+execute 'hi cErrInBracket '   .g:symbols
+execute 'hi cParenError '     .g:symbols
+execute 'hi cppSTLnamespace ' .g:types
+execute 'hi cppSTLfunction '  .g:function
+execute 'hi cCustomFunc '     .g:function
+
+" Hide tilda after file
+hi NonText          ctermfg=0
+
+" NERDTree
+execute 'hi Directory '  . g:literals
+hi NERDTreeCWD      ctermfg=1
+" hi Directory        ctermfg=46  cterm=bold
+hi NERDTreeFile     ctermfg=250  cterm=none
+hi NERDTreeFlags    ctermfg=250
+hi NERDTreeOpenable ctermfg=250
+hi NERDTreeClosable ctermfg=250
+hi NERDTreeExecFile ctermfg=39
+
+
+syn match AllSymbols /[\{,\},\(,\),;,@,$,:,\[,\],\=,+,<,>,.,\-,*,!,%,^,&,\/,|]/

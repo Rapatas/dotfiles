@@ -1,0 +1,190 @@
+" Context {{{
+
+if $CONTEXT == "amco"
+	let g:indent_size=4
+	set textwidth=132
+else
+	let g:indent_size=2
+	set textwidth=80
+	set expandtab
+endif
+
+" }}}
+
+let mapleader = "\<space>"
+source ~/.vim/plugins.vim
+runtime! plugin/default.vim " Override [vim-better-default]
+source ~/.vim/indentation.vim
+
+" Use fzf
+set rtp+=~/.fzf
+
+" Colors {{{
+
+colorscheme mycol
+
+" set colorcolumn=+1
+set colorcolumn=
+
+" Output the current syntax group
+nmap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+
+" }}}
+
+" Navigation {{{
+
+" Split windows with same keys as tmux
+nnoremap <Leader>w= <C-W>v
+nnoremap <Leader>w- <C-W>S
+
+" Same width on all panes
+nnoremap <Leader>w+ <C-W>=
+
+" Window to tab
+nnoremap <silent> <Leader>wt :tab split<CR>
+
+" Easier pane resize
+nnoremap <silent> <Leader>wl :exe "vertical resize +10"<CR>
+nnoremap <silent> <Leader>wh :exe "vertical resize -10"<CR>
+nnoremap <silent> <Leader>wk :exe "resize +10"<CR>
+nnoremap <silent> <Leader>wj :exe "resize -10"<CR>
+
+" Next - Prev {{{
+
+nnoremap <C-]> g<C-]>
+nnoremap <C-}> :YcmCompleter GoToDeclaration<CR>
+nnoremap { ?{<CR>:noh<CR>
+nnoremap } /{<CR>:noh<CR>
+nnoremap ( ?(<CR>:noh<CR>
+nnoremap ) /)<CR>:noh<CR>
+" nnoremap [[ ?{<CR>:noh<CR>
+" nnoremap ][ /{<CR>:noh<CR>
+" nnoremap [] ?}<CR>:noh<CR>
+" nnoremap ]] /}<CR>:noh<CR>
+nnoremap [[ ?{<CR>:noh<CR>
+nnoremap ]] /{<CR>:noh<CR>
+nnoremap ][ ?}<CR>:noh<CR>
+nnoremap [] /}<CR>:noh<CR>
+nnoremap [9 ?(<CR>:noh<CR>
+nnoremap ]9 /(<CR>:noh<CR>
+nnoremap [0 ?)<CR>:noh<CR>
+nnoremap ]0 /)<CR>:noh<CR>
+nnoremap [, ?<<CR>:noh<CR>
+nnoremap ], /<<CR>:noh<CR>
+nnoremap [. ?><CR>:noh<CR>
+nnoremap ]. /><CR>:noh<CR>
+nnoremap [{ ?[<CR>:noh<CR>
+nnoremap ]{ /[<CR>:noh<CR>
+nnoremap [} ?]<CR>:noh<CR>
+nnoremap ]} /]<CR>:noh<CR>
+nnoremap [' ?"<CR>:noh<CR>
+nnoremap ]' /"<CR>:noh<CR>
+nnoremap [" ?'<CR>:noh<CR>
+nnoremap ]" /'<CR>:noh<CR>
+
+" }}}
+
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+
+" }}}
+
+" General {{{
+
+" Folding
+set foldmethod=marker
+set foldmarker={{{,}}}
+set foldlevel=0
+nnoremap - za
+nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
+
+set encoding=UTF-8
+set timeoutlen=1000
+set ttimeoutlen=0
+set viminfo+=n~/.vim/viminfo
+set norelativenumber
+syntax sync minlines=10000
+set synmaxcol=0
+
+" SpellChecker
+set spelllang=el,en
+set spell
+
+" VISUALLY wrap long lines
+set wrap
+
+set mouse=a
+if has("mouse_sgr")
+	set ttymouse=sgr
+else
+	set ttymouse=xterm2
+end
+
+" General }}}
+
+" Auto behavior {{{
+
+" Disable automatic comment insertion
+autocmd FileType * setlocal formatoptions-=r formatoptions-=c formatoptions-=o
+
+" Update taglist every time I move
+autocmd CursorMoved * silent! TlistHighlightTag
+
+" autocmd CursorMovedI * silent! TlistHighlightTag
+
+" Restore cursor position when opening same file
+autocmd BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
+
+" Auto behavior }}}
+
+" Custom keybindings {{{
+
+" Save
+nnoremap <silent> <C-S> :w<CR>
+inoremap <silent> <C-S> :w<CR>
+vnoremap <silent> <C-S> :w<CR>gv
+
+" Die
+map <C-Q> :qa!<CR>
+
+" Close
+nnoremap <leader>q :bd<cr>
+
+" Clear search highlight
+map <leader>n :noh<cr>
+
+" Trim whitespace
+nnoremap <leader>dt :%s/\s\+$//e<cr>
+
+" Go up the tags
+" nnoremap <C-> <C-t>
+
+" }}}
+
+" Per file {{{
+
+augroup SourceCode
+	autocmd!
+
+	" Swap lines (needs cosco)
+	autocmd FileType javascript,css,cpp nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
+	autocmd FileType javascript,css,cpp nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
+
+	" Folding
+	autocmd FileType javascript,css,cpp,c setlocal foldmarker={,}
+	autocmd FileType sass,html setlocal foldmethod=indent
+	autocmd FileType json setlocal foldmethod=syntax
+
+augroup SourceCode
+
+" }}}

@@ -1,0 +1,1 @@
+/home/andy/.vim/colors/mycol.vim.white.bright

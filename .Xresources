@@ -1,0 +1,17 @@
+! Rofi {{
+
+!                                    Norm Bg  Norm Fg  Alt  Bg  High Bg  High Fg
+rofi.color-normal:                   #555555, #BBBBBB, #32302f, #BBBBBB, #000000
+rofi.modi:                           run
+rofi.opacity:                        100
+rofi.fullscreen:                     true
+rofi.font:                           mono 12
+rofi.color-enabled:                  true
+rofi.color-window:                   argb:99000000
+rofi.bw:                             0
+rofi.padding:                        250
+rofi.fuzzy:                          true
+rofi.separator-style:                solid
+rofi.hide-scrollbar:                 true
+
+! }}

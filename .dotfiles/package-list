@@ -1,0 +1,75 @@
+
+# Management {
+
+  snapd
+  mercurial
+  synaptic
+  gparted
+  gdebi
+  mtools
+  lm-sensors
+  etckeeper
+  htop
+  docker
+
+# }
+
+# Programming {
+
+  valgrind
+  libsfml-dev
+  doxygen
+  graphviz
+  build-essential
+  highlight
+  exuberant-ctags
+  autoconf
+  automake
+  linux-headers-generic
+  libclang-dev
+  manpages-dev
+  cmake
+  clang
+
+# }}
+
+# GUI {{
+
+  usb-creator-gtk
+  keepass2
+  vlc
+  autokey-gtk
+  gimp
+  qbittorrent
+  rofi
+  feh
+  qrencode
+
+# }
+
+# CLI {
+
+  screenfetch
+  thefuck
+  unrar
+  xdotool
+  git
+  curl
+  tmux
+  vim-gtk3
+  ranger
+  tree
+  xclip
+  sshfs
+
+# }
+
+# Backend {
+
+  compton
+  sxhkd
+  sox
+  libsox-fmt-mp3
+  alsa-utils
+
+# }

@@ -1,0 +1,6 @@
+--fields=+l
+--recurse=yes
+--exclude=build
+--exclude=.git
+--exclude=cmake
+--exclude=docs

@@ -1,0 +1,147 @@
+
+set background=dark
+highlight clear
+if exists("syntax_on")
+    syntax reset
+endif
+
+let g:colors_name="mycol"
+
+" Editor settings
+" hi Normal           ctermfg=46  ctermbg=none cterm=none
+hi Normal           ctermfg=250  ctermbg=none cterm=none
+" hi Normal          ctermfg=240   ctermbg=none cterm=none
+hi Cursor           ctermfg=200  ctermbg=none cterm=none
+hi CursorLine       ctermfg=none ctermbg=235  cterm=none
+hi LineNr           ctermfg=244  ctermbg=none cterm=none
+hi CursorLineNR     ctermfg=255  ctermbg=none cterm=none
+
+" Number column
+hi CursorColumn     ctermfg=none ctermbg=1    cterm=none
+hi FoldColumn       ctermfg=none ctermbg=237  cterm=none
+hi SignColumn       ctermfg=none ctermbg=1    cterm=none
+hi Folded           ctermfg=none ctermbg=none cterm=none
+
+" Window/Tab delimiters
+hi VertSplit        ctermfg=0    ctermbg=none cterm=none
+hi ColorColumn      ctermfg=none ctermbg=235  cterm=none
+hi TabLine          ctermfg=0    ctermbg=255  cterm=none
+hi TabLineFill      ctermfg=7    ctermbg=none cterm=none
+hi TabLineSel       ctermfg=7    ctermbg=255  cterm=bold
+
+" File Navigation / Searching
+hi Directory        ctermfg=none ctermbg=none cterm=none
+hi Search           ctermfg=none ctermbg=3    cterm=none
+hi IncSearch        ctermfg=none ctermbg=none cterm=none
+
+" Prompt/Status
+hi StatusLine       ctermfg=255  ctermbg=237  cterm=bold
+hi StatusLineNC     ctermfg=232  ctermbg=65   cterm=bold
+hi WildMenu         ctermfg=none ctermbg=none cterm=none
+hi Question         ctermfg=226  ctermbg=none cterm=none
+hi Title            ctermfg=6    ctermbg=none cterm=bold
+hi ModeMsg          ctermfg=none ctermbg=none cterm=none
+hi MoreMsg          ctermfg=none ctermbg=none cterm=none
+
+" Visual aid
+hi MatchParen       ctermfg=1    ctermbg=NONE cterm=none
+hi Visual           ctermfg=0    ctermbg=255  cterm=none
+hi VisualNOS        ctermfg=none ctermbg=none cterm=none
+hi NonText          ctermfg=none ctermbg=none cterm=none
+
+hi Todo             ctermfg=none ctermbg=none cterm=none
+hi Underlined       ctermfg=none ctermbg=none cterm=none
+hi Error            ctermfg=254  ctermbg=1    cterm=bold
+hi ErrorMsg         ctermfg=1    ctermbg=226  cterm=none
+hi WarningMsg       ctermfg=none ctermbg=none cterm=none
+hi Ignore           ctermfg=none ctermbg=none cterm=none
+hi SpecialKey       ctermfg=238  ctermbg=none cterm=none
+
+" Variable types
+hi Constant         ctermfg=none ctermbg=none cterm=none
+hi String           ctermfg=214  ctermbg=none cterm=none
+hi StringDelimiter  ctermfg=none ctermbg=none cterm=none
+hi Character        ctermfg=214  ctermbg=none cterm=none
+hi Number           ctermfg=214  ctermbg=none cterm=none
+hi Boolean          ctermfg=6    ctermbg=none cterm=bold
+hi Float            ctermfg=214  ctermbg=none cterm=none
+
+hi Identifier       ctermfg=255  ctermbg=none cterm=none
+hi Function         ctermfg=6    ctermbg=none cterm=none
+
+" Language constructs
+hi Statement        ctermfg=6    ctermbg=none cterm=bold
+hi htmlTagName      ctermfg=39   ctermbg=none cterm=bold
+hi htmlString       ctermfg=214  ctermbg=none cterm=bold
+hi Conditional      ctermfg=6    ctermbg=none cterm=bold
+hi Repeat           ctermfg=6    ctermbg=none cterm=bold
+hi Label            ctermfg=1    ctermbg=none cterm=none
+hi Operator         ctermfg=255  ctermbg=none cterm=none
+hi Keyword          ctermfg=1    ctermbg=none cterm=none
+hi Exception        ctermfg=88   ctermbg=none cterm=none
+hi Comment          ctermfg=30   ctermbg=none cterm=none
+
+hi Special          ctermfg=216  ctermbg=none cterm=none
+hi SpecialChar      ctermfg=216  ctermbg=none cterm=none
+hi Tag              ctermfg=none ctermbg=none cterm=none
+hi Delimiter        ctermfg=255  ctermbg=none cterm=none
+hi SpecialComment   ctermfg=216  ctermbg=none cterm=none
+hi Debug            ctermfg=none ctermbg=none cterm=none
+
+" C like
+hi PreProc          ctermfg=34   ctermbg=none cterm=none
+hi Include          ctermfg=34   ctermbg=none cterm=none
+hi Define           ctermfg=34   ctermbg=none cterm=none
+hi Macro            ctermfg=34   ctermbg=none cterm=none
+hi PreCondit        ctermfg=34   ctermbg=none cterm=none
+
+hi Type             ctermfg=6    ctermbg=none cterm=bold
+hi StorageClass     ctermfg=6    ctermbg=none cterm=bold
+hi Structure        ctermfg=6    ctermbg=none cterm=bold
+hi Typedef          ctermfg=6    ctermbg=none cterm=bold
+
+" Diff
+hi DiffAdd          ctermfg=none ctermbg=22   cterm=none
+hi DiffChange       ctermfg=none ctermbg=18   cterm=none
+hi DiffDelete       ctermfg=1    ctermbg=52   cterm=none
+hi DiffText         ctermfg=none ctermbg=136  cterm=none
+
+" Completion menu
+hi Pmenu            ctermfg=240  ctermbg=235  cterm=none
+hi PmenuSel         ctermfg=235  ctermbg=240  cterm=bold
+hi PmenuSbar        ctermfg=none ctermbg=233  cterm=none
+hi PmenuThumb       ctermfg=none ctermbg=240  cterm=none
+
+" Spelling
+hi SpellBad         ctermfg=none ctermbg=none cterm=underline
+hi SpellCap         ctermfg=none ctermbg=none cterm=none
+hi SpellLocal       ctermfg=none ctermbg=none cterm=none
+hi SpellRare        ctermfg=none ctermbg=none cterm=none
+
+" Specific settings
+hi cErrInBracket    ctermfg=255
+hi cParenError      ctermfg=255
+hi cLabel           ctermfg=6    cterm=bold
+hi cCustomClass     ctermfg=46   ctermbg=none cterm=none
+hi cCustomParen     ctermfg=46   ctermbg=none cterm=none
+hi cCustomFunc      ctermfg=39   ctermbg=none cterm=none
+hi cCustomScope     ctermfg=46   ctermbg=none cterm=none
+hi ControlSymbols   ctermfg=148 cterm=none
+hi AccessSymbols    ctermfg=148 cterm=none
+
+" Hide tilda after file
+hi NonText          ctermfg=0
+
+" NERDTree
+hi Directory        ctermfg=214  cterm=none
+hi NERDTreeCWD      ctermfg=214
+" hi Directory        ctermfg=46  cterm=bold
+hi NERDTreeFile     ctermfg=250  cterm=none
+hi NERDTreeFlags    ctermfg=250
+hi NERDTreeOpenable ctermfg=250
+hi NERDTreeClosable ctermfg=250
+hi NERDTreeExecFile ctermfg=39
+
+
+
+

@@ -1,0 +1,35 @@
+super + Return
+  xfce4-terminal
+
+# Menu
+#   rofi -show run
+
+# XF86MenuKB
+#   rofi -show run
+
+Print
+  xfce4-screenshooter -f
+
+ctrl + alt + L
+  xflock4
+
+ctrl + alt + Delete
+  xkill
+
+super + 1
+  ./bin/launcher/internet.sh
+super + 2
+  ./bin/launcher/thunar.sh
+super + 3
+  ./bin/launcher/terminal.sh
+super + 4
+super + 5
+super + 6
+  ./bin/launcher/signal.sh
+super + 7
+  ./bin/launcher/discord.sh
+super + 8
+  ./bin/launcher/slack.sh
+super + 9
+super + 0
+  ./bin/launcher/spotify.sh
