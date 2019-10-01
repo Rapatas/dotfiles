@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # All plugins
-vim -c 'PluginInstall' -c 'PluginUpdate' -c 'qa!'
+vim -c 'PluginInstall' -c 'qa!'
 
 # YCM
 sudo apt install -y build-essential python-dev python3-dev

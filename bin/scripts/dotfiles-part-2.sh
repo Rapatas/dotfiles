@@ -8,13 +8,20 @@ sed -i '/HISTFILESIZE=/d' ~/.bashrc
 sudo sh -c "echo \"Defaults timestamp_timeout=120\" > /etc/sudoers.d/timeout"
 sudo chmod 0440 /etc/sudoers.d/timeout
 
+sudo apt update
+
 sudo apt install -y etckeeper
 
-cat ~/.dotfiles/package-list >> ~/temp
-xargs -a <(sed '/^#.*$/d' ~/temp) sudo apt install -y
-rm ~/temp
+sudo apt upgrade -y
 
-~/.tmux/plugins/tpm/bin/install_plugins
+xargs -a <(sed '/^#.*$/d' ~/.dotfiles/package-list) sudo apt install -y
+xargs -a <(sed '/^#.*$/d' ~/.dotfiles/snap-list) sudo snap install
+
+tmux start-server
+tmux new-session -d
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
+tmux new-session "vim -c 'Tmuxline airline' -c 'TmuxlineSnapshot! ~/.tmux/theme_snapshot' -c 'q'"
+tmux kill-server
 
 ~/bin/install/ulauncher.sh
 ~/bin/install/signal.sh
@@ -24,5 +31,7 @@ rm ~/temp
 
 ~/bin/scripts/keygen.sh
 
-# Reset the sudo timeout to 15 mins
+# Reset the sudo timeout to default
 sudo rm /etc/sudoers.d/timeout
+
+reboot
