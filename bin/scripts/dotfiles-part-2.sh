@@ -17,17 +17,17 @@ sudo apt upgrade -y
 xargs -a <(sed '/^#.*$/d' ~/.dotfiles/package-list) sudo apt install -y
 xargs -a <(sed '/^#.*$/d' ~/.dotfiles/snap-list) sudo snap install
 
-tmux start-server
-tmux new-session -d
-~/.tmux/plugins/tpm/scripts/install_plugins.sh
-tmux new-session "vim -c 'Tmuxline airline' -c 'TmuxlineSnapshot! ~/.tmux/theme_snapshot' -c 'q'"
-tmux kill-server
-
 ~/bin/install/ulauncher.sh
 ~/bin/install/signal.sh
 ~/bin/install/fzf.sh
 ~/bin/install/ranger_devicons.sh
 ~/bin/install/vim.sh
+
+tmux start-server
+tmux new-session -d
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
+tmux new-session "vim -c 'Tmuxline airline' -c 'TmuxlineSnapshot! ~/.tmux/theme_snapshot' -c 'q'"
+tmux kill-server
 
 ~/bin/scripts/keygen.sh
 
