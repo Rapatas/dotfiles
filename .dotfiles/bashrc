@@ -1,5 +1,6 @@
 # Configs {
 
+  HISTCONTROL=ignoreboth
   # Show ISO timestamps on history
   HISTTIMEFORMAT="%FT%T "
   # Eternal bash history.

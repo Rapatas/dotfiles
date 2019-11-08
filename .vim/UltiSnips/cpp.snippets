@@ -109,3 +109,39 @@ $2
 
 // $1 }
 endsnippet
+
+snippet fre "std::for_each" i
+std::for_each(begin($1), end($1), $2);
+endsnippet
+
+snippet find "std::find" i
+auto $2 = std::find(begin($1), end($1), $3);
+endsnippet
+
+snippet findi "std::find_if" i
+auto $2 = std::find_if(begin($1), end($1), $3);
+endsnippet
+
+snippet findin "std::find_if_not" i
+auto $2 = std::find_if_not(begin($1), end($1), $3);
+endsnippet
+
+snippet remi "std::remove_if" i
+auto $2 = std::remove_if(begin($1), end($1), $3);
+endsnippet
+
+snippet swap "std::swap" i
+std::swap($1, $2);
+endsnippet
+
+snippet max "std::max" i
+auto $3 = std::max($1, $2);
+endsnippet
+
+snippet min "std::min" i
+auto $3 = std::min($1, $2);
+endsnippet
+
+snippet rev "std::reverse" i
+std::reverse(begin($1), end($1));
+endsnippet

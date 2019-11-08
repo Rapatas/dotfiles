@@ -15,7 +15,7 @@ sed -i '/^increase_font_size_key=/s/=.*/="<Control>equal"/'  $TILDACONF
 sed -i '/^decrease_font_size_key=/s/=.*/="<Control>minus"/'  $TILDACONF
 sed -i '/^normalize_font_size_key=/s/=.*/="<Control>0"/'  $TILDACONF
 sed -i '/^max_width=/s/=.*/=1920/' $TILDACONF
-sed -i '/^max_height=/s/=.*/=834/' $TILDACONF
+sed -i '/^max_height=/s/=.*/=600/' $TILDACONF
 sed -i '/^scrollbar_pos=/s/=.*/=2/' $TILDACONF
 sed -i '/^scroll_history_infinite=/s/=.*/=true/' $TILDACONF
 sed -i '/^scrollbar=/s/=.*/=false/' $TILDACONF

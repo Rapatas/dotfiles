@@ -3,6 +3,7 @@
 # Delete hist commands from .bashrc
 sed -i '/HISTSIZE=/d' ~/.bashrc
 sed -i '/HISTFILESIZE=/d' ~/.bashrc
+sed -i '/HISTCONTROL=/d' ~/.bashrc
 
 # Extend sudo timeout so it can last while the next apt is running
 sudo sh -c "echo \"Defaults timestamp_timeout=120\" > /etc/sudoers.d/timeout"
