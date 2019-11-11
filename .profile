@@ -17,6 +17,7 @@ if xset q &> /dev/null; then
   autokey-gtk &
   $HOME/bin/settings/mouse/HVTG587_deceleration.sh &
   $HOME/bin/settings/mouse/PixArtMicrosoft_deceleration.sh &
+  $HOME/bin/settings/mouse/PixArtGaming_deceleration.sh &
   compton &
   sxhkd &
   tilda &
