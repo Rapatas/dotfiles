@@ -22,7 +22,8 @@ set cinoptions=>1s
 " Place Jump Labels at column 0
 set cinoptions+=L-1
 
-" Place case one level after switch
+" Place "case" one level after switch, 
+" This only applies to the case header
 set cinoptions+=:1s
 
 " Place blocks in switch correctly

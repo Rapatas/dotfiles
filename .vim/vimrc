@@ -2,6 +2,10 @@
 
 if $CONTEXT == "amco"
 	let g:indent_size=4
+	set textwidth=80
+	set expandtab
+elseif $CONTEXT == "amcol"
+	let g:indent_size=4
 	set textwidth=132
 else
 	let g:indent_size=2
@@ -145,6 +149,9 @@ autocmd BufReadPost *
 	\   exe "normal! g`\"" |
 	\ endif
 
+" Trim whitespace on cpp/h files
+autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
+
 " Auto behavior }}}
 
 " Custom keybindings {{{
@@ -161,7 +168,7 @@ map <C-Q> :qa!<CR>
 nnoremap <leader>q :bd<cr>
 
 " Clear search highlight
-map <leader>n :noh<cr>
+map <leader>/ :noh<cr>
 
 " Trim whitespace
 nnoremap <leader>dt :%s/\s\+$//e<cr>

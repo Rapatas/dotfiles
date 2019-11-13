@@ -4,3 +4,4 @@
 --exclude=.git
 --exclude=cmake
 --exclude=docs
+--exclude=doc
