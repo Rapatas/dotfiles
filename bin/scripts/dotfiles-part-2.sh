@@ -23,6 +23,7 @@ xargs -a <(sed '/^#.*$/d' ~/.dotfiles/snap-list) sudo snap install
 ~/bin/install/fzf.sh
 ~/bin/install/ranger_devicons.sh
 ~/bin/install/vim.sh
+~/bin/install/tild-ah.sh
 
 tmux start-server
 tmux new-session -d
