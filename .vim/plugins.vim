@@ -7,16 +7,16 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 " Utils
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'AndrewRadev/switch.vim'
-Plugin 'sickill/vim-pasta'
+Plugin 'jiangmiao/auto-pairs' " Better pair insertion
+Plugin 'AndrewRadev/switch.vim' " Lazy <space>-
+Plugin 'sickill/vim-pasta' " Better indentation when pasting
 Plugin 'liuchengxu/vim-better-default'
-Plugin 'tpope/vim-surround'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'lfilho/cosco.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'mileszs/ack.vim'
-Plugin 'Valloric/ListToggle'
+Plugin 'tpope/vim-surround' " Use n:cs({ v:S) n:ds) n:ysiw]
+Plugin 'junegunn/vim-easy-align' " <space>a*=
+Plugin 'lfilho/cosco.vim' " <space>;
+Plugin 'tpope/vim-repeat' " Fix . for plugins
+" Plugin 'mileszs/ack.vim'
+Plugin 'Valloric/ListToggle' " <space>tl / tq
 " Auto Complete
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'mattn/emmet-vim'
@@ -42,12 +42,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'ryanoasis/vim-devicons'
-Plugin 'severin-lemaignan/vim-minimap'
+" Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'junegunn/goyo.vim'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Navigation
-Plugin 'tpope/vim-vinegar'
+" Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'junegunn/fzf.vim'
@@ -64,6 +64,17 @@ Plugin 'wikitopian/hardmode'
 call vundle#end()
 filetype plugin indent on
 syntax enable
+
+" }}}
+
+" Markdown {{{
+
+nnoremap <space>tm :Toc<cr>
+
+" }}}
+
+" auto-pair {{{
+
 
 " }}}
 
@@ -92,16 +103,6 @@ let g:switch_mapping = "<leader>-"
 " Better Default {{{
 
 let g:vim_better_default_tabs_as_spaces = 0
-
-" }}}
-
-" Minimap {{{
-
-" let g:minimap_show='<leader>mm'
-let g:minimap_update='<leader>mu'
-" let g:minimap_close='<leader>mc'
-let g:minimap_toggle='<leader>tm'
-let g:minimap_highlight='Visual'
 
 " }}}
 
