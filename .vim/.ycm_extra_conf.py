@@ -22,7 +22,7 @@ flags = [
     '-x', 'c++',
     '-I .',
     '-I','include',
-    '-isystem', '/usr/include/c++/8',
+    '-isystem', '/usr/include/c++/7',
     '-isystem', '/usr/include',
     '-isystem', '/usr/local/include',
     # Project libraries
