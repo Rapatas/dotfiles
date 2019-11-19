@@ -7,6 +7,7 @@ if $CONTEXT == "amco"
 elseif $CONTEXT == "amcol"
 	let g:indent_size=4
 	set textwidth=132
+
 else
 	let g:indent_size=2
 	set textwidth=80
