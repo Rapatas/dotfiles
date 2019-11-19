@@ -22,6 +22,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'mattn/emmet-vim'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
 " Move
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'terryma/vim-multiple-cursors'
@@ -42,6 +44,8 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin 'junegunn/goyo.vim'
+Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Navigation
 Plugin 'tpope/vim-vinegar'
 Plugin 'scrooloose/nerdtree'
@@ -125,6 +129,10 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCommenterToggle = '<leader>/'
+" nnoremap <leader>/ <Plug>NERDCommenterToggle'n', 'Toggle')<Cr>
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle gv
 " Doxygen
 nnoremap <leader>cd :Dox<CR>
 
@@ -165,6 +173,8 @@ let g:ycm_max_diagnostics_to_display = 0
 
 nnoremap <leader>yf :YcmCompleter FixIt<CR>
 nnoremap <leader>yt :YcmCompleter GetType<CR>
+nnoremap gd <C-]>
+nnoremap gh :YcmCompleter GoToDeclaration<CR>
 
 " }}}
 
