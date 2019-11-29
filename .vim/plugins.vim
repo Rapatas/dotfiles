@@ -1,69 +1,76 @@
 " Vundle {{{
 
-set nocompatible
-filetype off
+" set nocompatible
+" filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+Plug 'VundleVim/Vundle.vim'
 " Utils
-Plugin 'jiangmiao/auto-pairs' " Better pair insertion
-Plugin 'AndrewRadev/switch.vim' " Lazy <space>-
-Plugin 'sickill/vim-pasta' " Better indentation when pasting
-Plugin 'liuchengxu/vim-better-default'
-Plugin 'tpope/vim-surround' " Use n:cs({ v:S) n:ds) n:ysiw]
-Plugin 'junegunn/vim-easy-align' " <space>a*=
-Plugin 'lfilho/cosco.vim' " <space>;
-Plugin 'tpope/vim-repeat' " Fix . for plugins
+Plug 'jiangmiao/auto-pairs' " Better pair insertion
+Plug 'AndrewRadev/switch.vim' " Lazy <space>-
+Plug 'sickill/vim-pasta' " Better indentation when pasting
+Plug 'liuchengxu/vim-better-default'
+Plug 'tpope/vim-surround' " Use n:cs({ v:S) n:ds) n:ysiw]
+Plug 'junegunn/vim-easy-align' " <space>a*=
+Plug 'lfilho/cosco.vim' " <space>;
+Plug 'tpope/vim-repeat' " Fix . for plugins
 " Plugin 'mileszs/ack.vim'
-Plugin 'Valloric/ListToggle' " <space>tl / tq
+Plug 'Valloric/ListToggle' " <space>tl / tq
 " Auto Complete
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'mattn/emmet-vim'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-Plugin 'xolox/vim-easytags'
-Plugin 'xolox/vim-misc'
+Plug 'Valloric/YouCompleteMe'
+Plug 'mattn/emmet-vim'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 " Move
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'tpope/vim-unimpaired'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-unimpaired'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 " Syntax
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'ap/vim-css-color'
-Plugin 'peterhoeg/vim-qml'
-Plugin 'pboettch/vim-cmake-syntax'
-Plugin 'baskerville/vim-sxhkdrc'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'ap/vim-css-color'
+Plug 'peterhoeg/vim-qml'
+Plug 'pboettch/vim-cmake-syntax'
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'octol/vim-cpp-enhanced-highlight'
 " Visual Candy
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'ryanoasis/vim-devicons'
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'ryanoasis/vim-devicons'
 " Plugin 'severin-lemaignan/vim-minimap'
-Plugin 'junegunn/goyo.vim'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'junegunn/goyo.vim'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " Navigation
 " Plugin 'tpope/vim-vinegar'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'junegunn/fzf.vim'
-Plugin 'vim-ctrlspace/vim-ctrlspace'
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/taglist.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'christoomey/vim-tmux-navigator'
 " Comments
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'vim-scripts/DoxygenToolkit.vim'
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'wikitopian/hardmode'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'wikitopian/hardmode'
 
-call vundle#end()
-filetype plugin indent on
-syntax enable
+" Initialize plugin system
+call plug#end()
+" filetype plugin indent on
+" syntax enable
 
 " }}}
 

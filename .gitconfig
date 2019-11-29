@@ -1,3 +1,5 @@
 [user]
 	email = 15367779+Rapatas@users.noreply.github.com
 	name = Andy Rapatas
+[diff]
+	tool = vimdiff

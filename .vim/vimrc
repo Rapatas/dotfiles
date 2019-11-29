@@ -111,7 +111,7 @@ nnoremap - za
 nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
 
 set encoding=UTF-8
-set timeoutlen=1000
+set timeoutlen=500
 set ttimeoutlen=0
 set viminfo+=n~/.vim/viminfo
 set norelativenumber
@@ -136,6 +136,9 @@ end
 
 " Auto behavior {{{
 
+" auto reload files based on vim and tmux events
+set autoread
+
 " Disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=r formatoptions-=c formatoptions-=o
 
@@ -152,6 +155,18 @@ autocmd BufReadPost *
 
 " Trim whitespace on cpp/h files
 autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au!
+  au BufReadPre  *.bin let &bin=1
+  au BufReadPost *.bin if &bin | %!xxd
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+augroup END
 
 " Auto behavior }}}
 

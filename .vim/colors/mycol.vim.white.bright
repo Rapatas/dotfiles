@@ -100,7 +100,7 @@ execute 'hi Statement       ' . g:types
 hi htmlTagName      ctermfg=39   ctermbg=none cterm=bold
 hi Operator         ctermfg=255  ctermbg=none cterm=none
 hi Exception        ctermfg=88   ctermbg=none cterm=none
-hi Comment          ctermfg=33  ctermbg=none cterm=none
+hi Comment          ctermfg=248  ctermbg=none cterm=none
 
 hi Special          ctermfg=216  ctermbg=none cterm=none
 hi SpecialChar      ctermfg=216  ctermbg=none cterm=none
