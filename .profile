@@ -18,7 +18,6 @@ if xset q &> /dev/null; then
   $HOME/bin/settings/mouse/HVTG587_deceleration.sh &
   $HOME/bin/settings/mouse/PixArtMicrosoft_deceleration.sh &
   $HOME/bin/settings/mouse/PixArtGaming_deceleration.sh &
-  compton &
   sxhkd &
   tilda &
   ulauncher &
