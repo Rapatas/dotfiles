@@ -31,7 +31,7 @@ hi Type         ctermfg=6 cterm=bold
 hi Variable     ctermfg=46
 
 " Editor settings
-hi Normal           ctermfg=46   ctermbg=none cterm=none
+hi Normal           ctermfg=255   ctermbg=none cterm=none
 hi Cursor           ctermfg=200  ctermbg=none cterm=none
 hi CursorLine       ctermfg=none ctermbg=235  cterm=none
 hi LineNr           ctermfg=244  ctermbg=none cterm=none
@@ -100,7 +100,7 @@ execute 'hi Statement       ' . g:types
 hi htmlTagName      ctermfg=39   ctermbg=none cterm=bold
 hi Operator         ctermfg=255  ctermbg=none cterm=none
 hi Exception        ctermfg=88   ctermbg=none cterm=none
-hi Comment          ctermfg=248  ctermbg=none cterm=none
+hi Comment          ctermfg=244  ctermbg=none cterm=none
 
 hi Special          ctermfg=216  ctermbg=none cterm=none
 hi SpecialChar      ctermfg=216  ctermbg=none cterm=none
@@ -145,7 +145,7 @@ execute 'hi cCustomClass      '.g:class
 execute 'hi cCustomScope '    .g:symbols
 execute 'hi ControlSymbols '  .g:symbols
 execute 'hi AccessSymbols '   .g:symbols
-execute 'hi AllSymbols '      .g:symbols
+" execute 'hi AllSymbols '      .g:symbols
 execute 'hi cErrInBracket '   .g:symbols
 execute 'hi cParenError '     .g:symbols
 execute 'hi cppSTLnamespace ' .g:types

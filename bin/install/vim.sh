@@ -1,7 +1,10 @@
 #!/bin/sh
 
 # All plugins
-vim -c 'PluginInstall' -c 'qa!'
+
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
+
+vim -c 'PlugInstall' -c 'qa!'
 
 # YCM
 sudo apt install -y build-essential python-dev python3-dev
