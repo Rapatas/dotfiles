@@ -12,7 +12,9 @@ Plug 'VundleVim/Vundle.vim'
 " Utils
 Plug 'jiangmiao/auto-pairs' " Better pair insertion
 Plug 'AndrewRadev/switch.vim' " Lazy <space>-
-" Plug 'sickill/vim-pasta' " Better indentation when pasting
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'tpope/vim-surround' " Use n:cs({ v:S) n:ds) n:ysiw]
 Plug 'junegunn/vim-easy-align' " <space>a*=
 Plug 'lfilho/cosco.vim' " <space>;
@@ -117,6 +119,34 @@ map <leader>F :Goyo<CR>
 
 nmap <C-f> <Plug>(easymotion-overwin-f)
 nmap <C-t> <Plug>(easymotion-overwin-f)
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzyword#converter()],
+  \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space><Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
+" map /  <Plug>(incsearch-forward)
+" map ?  <Plug>(incsearch-backward)
+" map g/ <Plug>(incsearch-stay)
+
+map ?  <Plug>(incsearch-backward)
+map / <Plug>(incsearch-stay)
+
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 " }}}
 

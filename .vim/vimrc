@@ -208,10 +208,6 @@ vmap k gk
 
 " }}}
 
-" noremap <Leader>p "0p
-" noremap <Leader>P "0P
-vnoremap p "0p
-
 nnoremap <CR> :
 
 " Folding
@@ -263,6 +259,10 @@ nnoremap <leader>dt :%s/\s\+$//e<cr>
 " nnoremap <C-> <C-t>
 
 " Pasta {{{
+
+" noremap <Leader>p "0p
+" noremap <Leader>P "0P
+" vnoremap p "0p
 
 function! s:NormalPasta(p, o)
   if (getregtype() ==# "V")
