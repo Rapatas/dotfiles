@@ -233,6 +233,16 @@ let g:lt_height = 10
 
 " }}}
 
+" Easy Tags {{{
+
+let g:easytags_async = 1
+let g:easytags_opts = ['--fields=+l']
+
+set tags=tags;
+let g:easytags_dynamic_files = 1
+
+" }}}
+
 " fzf {{{
 
 nnoremap <C-P> :Files<CR>

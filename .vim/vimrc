@@ -32,7 +32,17 @@ colorscheme mycol
 set colorcolumn=
 
 " Output the current syntax group
-nmap <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+
+function! SynStack ()
+    for i1 in synstack(line("."), col("."))
+        let i2 = synIDtrans(i1)
+        let n1 = synIDattr(i1, "name")
+        let n2 = synIDattr(i2, "name")
+        echo n1 "->" n2
+    endfor
+endfunction
+
+nnoremap <F3> :call SynStack()<CR>
 
 " }}}
 
@@ -153,9 +163,6 @@ autocmd BufReadPost *
 	\   exe "normal! g`\"" |
 	\ endif
 
-" Trim whitespace on cpp/h files
-autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
-
 " vim -b : edit binary using xxd-format!
 augroup Binary
   au!
@@ -188,6 +195,9 @@ map <leader>/ :noh<cr>
 
 " Trim whitespace
 nnoremap <leader>dt :%s/\s\+$//e<cr>
+
+" Auto-trim whitespace on cpp/h files
+" autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " Go up the tags
 " nnoremap <C-> <C-t>
