@@ -12,11 +12,11 @@ Plug 'VundleVim/Vundle.vim'
 " Utils
 Plug 'jiangmiao/auto-pairs' " Better pair insertion
 Plug 'AndrewRadev/switch.vim' " Lazy <space>-
-Plug 'sickill/vim-pasta' " Better indentation when pasting
-Plug 'liuchengxu/vim-better-default'
+" Plug 'sickill/vim-pasta' " Better indentation when pasting
 Plug 'tpope/vim-surround' " Use n:cs({ v:S) n:ds) n:ysiw]
 Plug 'junegunn/vim-easy-align' " <space>a*=
 Plug 'lfilho/cosco.vim' " <space>;
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat' " Fix . for plugins
 " Plugin 'mileszs/ack.vim'
 Plug 'Valloric/ListToggle' " <space>tl / tq
@@ -107,12 +107,6 @@ let g:switch_mapping = "<leader>-"
 
 " }}}
 
-" Better Default {{{
-
-let g:vim_better_default_tabs_as_spaces = 0
-
-" }}}
-
 " Goyo {{{
 
 map <leader>F :Goyo<CR>
@@ -121,7 +115,8 @@ map <leader>F :Goyo<CR>
 
 " EasyMotion {{{
 
-nmap f <Plug>(easymotion-overwin-f)
+nmap <C-f> <Plug>(easymotion-overwin-f)
+nmap <C-t> <Plug>(easymotion-overwin-f)
 
 " }}}
 

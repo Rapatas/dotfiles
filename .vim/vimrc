@@ -18,7 +18,6 @@ endif
 
 let mapleader = "\<space>"
 source ~/.vim/plugins.vim
-runtime! plugin/default.vim " Override [vim-better-default]
 source ~/.vim/indentation.vim
 
 " Use fzf
@@ -45,6 +44,98 @@ endfunction
 nnoremap <F3> :call SynStack()<CR>
 
 " }}}
+
+" General {{{
+
+" Folding
+set foldmethod=marker
+set foldmarker={{{,}}}
+set foldlevel=0
+nnoremap - za
+nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
+
+set encoding=UTF-8
+set timeoutlen=500
+set hidden
+set ttimeoutlen=0
+set viminfo+=n~/.vim/viminfo
+set norelativenumber
+syntax sync minlines=10000
+set synmaxcol=0
+
+set wildmode=list:longest,full
+
+set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
+
+set shortmess=atOI " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
+set ignorecase     " Case insensitive search
+set smartcase      " ... but case sensitive when uc present
+set scrolljump=5   " Line to scroll when cursor leaves screen
+set scrolloff=3    " Minumum lines to keep above and below cursor"
+set whichwrap+=<,>,h,l  " Allow backspace and cursor keys to cross line boundaries
+set splitright     " Puts new vsplit windows to the right of the current
+set splitbelow     " Puts new split windows to the bottom of the current
+set mousehide      " Hide the mouse cursor while typing"
+set t_Co=256       " Use 256 colors"
+set ruler          " Show the ruler
+set showcmd        " Show partial commands in status line and Selected characters/lines in visual mode
+set showmode       " Show current mode in command-line
+set showmatch      " Show matching brackets/parentthesis
+set matchtime=5    " Show matching time"
+set report=0       " Always report changed lines
+set linespace=0    " No extra spaces between rows
+set pumheight=20   " Avoid the pop up menu occupying the whole screen"
+
+" SpellChecker
+set spelllang=el,en
+set spell
+
+" VISUALLY wrap long lines
+set wrap
+
+set mouse=a
+if has("mouse_sgr")
+	set ttymouse=sgr
+else
+	set ttymouse=xterm2
+end
+
+" General }}}
+
+" Auto behavior {{{
+
+" auto reload files based on vim and tmux events
+set autoread
+
+" Disable automatic comment insertion
+autocmd FileType * setlocal formatoptions-=r formatoptions-=c formatoptions-=o
+
+" Update taglist every time I move
+autocmd CursorMoved * silent! TlistHighlightTag
+
+" autocmd CursorMovedI * silent! TlistHighlightTag
+
+" Restore cursor position when opening same file
+autocmd BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au!
+  au BufReadPre  *.bin let &bin=1
+  au BufReadPost *.bin if &bin | %!xxd
+  au BufReadPost *.bin set ft=xxd | endif
+  au BufWritePre *.bin if &bin | %!xxd -r
+  au BufWritePre *.bin endif
+  au BufWritePost *.bin if &bin | %!xxd
+  au BufWritePost *.bin set nomod | endif
+augroup END
+
+" Auto behavior }}}
+
+" Custom keybindings {{{
 
 " Navigation {{{
 
@@ -109,75 +200,31 @@ nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
 
+" Treat long lines as break lines (useful when moving around in them)
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
+
 " }}}
 
-" General {{{
+" noremap <Leader>p "0p
+" noremap <Leader>P "0P
+vnoremap p "0p
+
+nnoremap <CR> :
 
 " Folding
-set foldmethod=marker
-set foldmarker={{{,}}}
-set foldlevel=0
-nnoremap - za
-nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
-
-set encoding=UTF-8
-set timeoutlen=500
-set ttimeoutlen=0
-set viminfo+=n~/.vim/viminfo
-set norelativenumber
-syntax sync minlines=10000
-set synmaxcol=0
-
-" SpellChecker
-set spelllang=el,en
-set spell
-
-" VISUALLY wrap long lines
-set wrap
-
-set mouse=a
-if has("mouse_sgr")
-	set ttymouse=sgr
-else
-	set ttymouse=xterm2
-end
-
-" General }}}
-
-" Auto behavior {{{
-
-" auto reload files based on vim and tmux events
-set autoread
-
-" Disable automatic comment insertion
-autocmd FileType * setlocal formatoptions-=r formatoptions-=c formatoptions-=o
-
-" Update taglist every time I move
-autocmd CursorMoved * silent! TlistHighlightTag
-
-" autocmd CursorMovedI * silent! TlistHighlightTag
-
-" Restore cursor position when opening same file
-autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal! g`\"" |
-	\ endif
-
-" vim -b : edit binary using xxd-format!
-augroup Binary
-  au!
-  au BufReadPre  *.bin let &bin=1
-  au BufReadPost *.bin if &bin | %!xxd
-  au BufReadPost *.bin set ft=xxd | endif
-  au BufWritePre *.bin if &bin | %!xxd -r
-  au BufWritePre *.bin endif
-  au BufWritePost *.bin if &bin | %!xxd
-  au BufWritePost *.bin set nomod | endif
-augroup END
-
-" Auto behavior }}}
-
-" Custom keybindings {{{
+nnoremap <silent> <Leader>f0 :set foldlevel=0<CR>
+nnoremap <silent> <Leader>f1 :set foldlevel=1<CR>
+nnoremap <silent> <Leader>f2 :set foldlevel=2<CR>
+nnoremap <silent> <Leader>f3 :set foldlevel=3<CR>
+nnoremap <silent> <Leader>f4 :set foldlevel=4<CR>
+nnoremap <silent> <Leader>f5 :set foldlevel=5<CR>
+nnoremap <silent> <Leader>f6 :set foldlevel=6<CR>
+nnoremap <silent> <Leader>f7 :set foldlevel=7<CR>
+nnoremap <silent> <Leader>f8 :set foldlevel=8<CR>
+nnoremap <silent> <Leader>f9 :set foldlevel=9<CR>
 
 " Save
 nnoremap <silent> <C-S> :w<CR>
@@ -190,6 +237,19 @@ map <C-Q> :qa!<CR>
 " Close
 nnoremap <leader>q :bd<cr>
 
+" Quit visual mode
+vnoremap v <Esc>
+
+" Toggle pastemode
+nnoremap <silent> <Leader>tp :setlocal paste!<CR>
+
+" :W sudo saves the file
+command! W w !sudo tee % > /dev/null
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
 " Clear search highlight
 map <leader>/ :noh<cr>
 
@@ -201,6 +261,80 @@ nnoremap <leader>dt :%s/\s\+$//e<cr>
 
 " Go up the tags
 " nnoremap <C-> <C-t>
+
+" Pasta {{{
+
+function! s:NormalPasta(p, o)
+  if (getregtype() ==# "V")
+    exe "normal! " . a:o . "\<space>\<bs>\<esc>" . v:count1 . '"' . v:register . ']p'
+    " Save the `[ and `] marks (point to the last modification)
+    let first = getpos("'[")
+    let last  = getpos("']")
+    normal! k"_dd
+    " Compensate the line we have just deleted
+    let first[1] -= 1
+    let last[1]  -= 1
+    call setpos("'[", first)
+    call setpos("']", last)
+  else
+    exe "normal! " . v:count1 . '"' . v:register . a:p
+  endif
+endfunction
+
+function! s:VisualPasta()
+  if (visualmode() ==# "V")
+    if (getregtype() ==# "V")
+      exe "normal! gv\"_c\<space>\<bs>\<esc>" . v:count1 . '"' . v:register . '"0]pk"_dd'
+    else
+      exe "normal! gv\"_c\<space>\<bs>\<esc>" . v:count1 . '"' . v:register . '"0]p'
+    endif
+  else
+    " workaround strange Vim behavior (""p is no-op in visual mode)
+    let reg = v:register == '"' ? '' : '"' . v:register
+
+    exe "normal! gv" . v:count1 . reg . "\"0p"
+  endif
+endfunction
+
+function! s:SetupPasta()
+  if exists("g:pasta_enabled_filetypes")
+    if index(g:pasta_enabled_filetypes, &ft) == -1
+      return
+    endif
+  elseif exists("g:pasta_disabled_filetypes") &&
+       \ index(g:pasta_disabled_filetypes, &ft) != -1
+    return
+  endif
+
+  exe "nmap <buffer> " . g:pasta_paste_before_mapping . " <Plug>BeforePasta"
+  exe "xmap <buffer> " . g:pasta_paste_before_mapping . " <Plug>VisualPasta"
+
+  exe "nmap <buffer> " . g:pasta_paste_after_mapping . " <Plug>AfterPasta"
+  exe "xmap <buffer> " . g:pasta_paste_after_mapping . " <Plug>VisualPasta"
+endfunction
+
+if !exists("g:pasta_disabled_filetypes")
+  let g:pasta_disabled_filetypes = ["python", "coffee", "markdown",
+        \"yaml", "slim", "nerdtree", "netrw", "startify", "ctrlp"]
+endif
+
+if !exists("g:pasta_paste_before_mapping")
+  let g:pasta_paste_before_mapping = 'P'
+endif
+
+if !exists("g:pasta_paste_after_mapping")
+  let g:pasta_paste_after_mapping = 'p'
+endif
+
+nnoremap <silent> <Plug>BeforePasta :<C-U>call <SID>NormalPasta('P', 'O')<CR>
+nnoremap <silent> <Plug>AfterPasta :<C-U>call <SID>NormalPasta('p', 'o')<CR>
+xnoremap <silent> <Plug>VisualPasta :<C-U>call <SID>VisualPasta()<CR>
+
+augroup vim_pasta
+  au FileType * call <SID>SetupPasta()
+augroup END
+
+" }}}
 
 " }}}
 
