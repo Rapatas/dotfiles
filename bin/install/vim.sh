@@ -8,5 +8,5 @@ vim -c 'PlugInstall' -c 'qa!'
 
 # YCM
 sudo apt install -y build-essential python-dev python3-dev
-cd ~/.vim/bundle/YouCompleteMe/
+cd ~/.vim/plugged/YouCompleteMe/
 ./install.py --clang-completer
