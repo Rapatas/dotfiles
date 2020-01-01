@@ -71,6 +71,8 @@
   sxhkd
   sox
   libsox-fmt-mp3
+  exfat-fuse 
+  exfat-utils
   alsa-utils
 
 # }
