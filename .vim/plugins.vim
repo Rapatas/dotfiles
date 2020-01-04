@@ -281,3 +281,10 @@ if executable('ag')
 endif
 
 " }}}
+
+" Multiple cursorrs {{{
+
+nnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+vnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+
+" }}}

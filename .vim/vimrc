@@ -20,9 +20,6 @@ let mapleader = "\<space>"
 source ~/.vim/plugins.vim
 source ~/.vim/indentation.vim
 
-" Use fzf
-set rtp+=~/.fzf
-
 " Colors {{{
 
 colorscheme mycol
@@ -47,6 +44,9 @@ nnoremap <F3> :call SynStack()<CR>
 
 " General {{{
 
+" Use fzf
+set rtp+=~/.fzf
+
 " Folding
 set foldmethod=marker
 set foldmarker={{{,}}}
@@ -54,6 +54,7 @@ set foldlevel=0
 nnoremap - za
 nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
 
+set number
 set encoding=UTF-8
 set timeoutlen=500
 set hidden
@@ -62,11 +63,8 @@ set viminfo+=n~/.vim/viminfo
 set norelativenumber
 syntax sync minlines=10000
 set synmaxcol=0
-
 set wildmode=list:longest,full
-
 set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
-
 set shortmess=atOI " No help Uganda information, and overwrite read messages to avoid PRESS ENTER prompts
 set ignorecase     " Case insensitive search
 set smartcase      " ... but case sensitive when uc present
@@ -75,7 +73,6 @@ set scrolloff=3    " Minumum lines to keep above and below cursor"
 set whichwrap+=<,>,h,l  " Allow backspace and cursor keys to cross line boundaries
 set splitright     " Puts new vsplit windows to the right of the current
 set splitbelow     " Puts new split windows to the bottom of the current
-set mousehide      " Hide the mouse cursor while typing"
 set t_Co=256       " Use 256 colors"
 set ruler          " Show the ruler
 set showcmd        " Show partial commands in status line and Selected characters/lines in visual mode
@@ -84,7 +81,7 @@ set showmatch      " Show matching brackets/parentthesis
 set matchtime=5    " Show matching time"
 set report=0       " Always report changed lines
 set linespace=0    " No extra spaces between rows
-set pumheight=20   " Avoid the pop up menu occupying the whole screen"
+set pumheight=30   " Avoid the pop up menu occupying the whole screen"
 
 " SpellChecker
 set spelllang=el,en
@@ -94,6 +91,8 @@ set spell
 set wrap
 
 set mouse=a
+" Hide the mouse cursor while typing
+set mousehide      
 if has("mouse_sgr")
 	set ttymouse=sgr
 else
