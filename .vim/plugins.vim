@@ -50,12 +50,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'ryanoasis/vim-devicons'
-" Plugin 'severin-lemaignan/vim-minimap'
 Plug 'junegunn/goyo.vim'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 " Navigation
-" Plugin 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/taglist.vim'
 Plug 'junegunn/fzf.vim'
@@ -117,9 +115,6 @@ map <leader>F :Goyo<CR>
 
 " EasyMotion {{{
 
-nmap <C-f> <Plug>(easymotion-overwin-f)
-nmap <C-t> <Plug>(easymotion-overwin-f)
-
 function! s:config_easyfuzzymotion(...) abort
   return extend(copy({
   \   'converters': [incsearch#config#fuzzyword#converter()],
@@ -130,14 +125,11 @@ function! s:config_easyfuzzymotion(...) abort
   \ }), get(a:, 1, {}))
 endfunction
 
-noremap <silent><expr> <Space><Space>/ incsearch#go(<SID>config_easyfuzzymotion())
-
 " map /  <Plug>(incsearch-forward)
 " map ?  <Plug>(incsearch-backward)
 " map g/ <Plug>(incsearch-stay)
-
-map ?  <Plug>(incsearch-backward)
-map / <Plug>(incsearch-stay)
+" map ?  <Plug>(incsearch-backward)
+" map / <Plug>(incsearch-stay)
 
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
@@ -147,6 +139,9 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion())
+nmap ( <Plug>(easymotion-overwin-f)
 
 " }}}
 

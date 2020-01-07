@@ -160,8 +160,8 @@ nnoremap <C-]> g<C-]>
 nnoremap <C-}> :YcmCompleter GoToDeclaration<CR>
 nnoremap { ?{<CR>:noh<CR>
 nnoremap } /{<CR>:noh<CR>
-nnoremap ( ?(<CR>:noh<CR>
-nnoremap ) /)<CR>:noh<CR>
+" nnoremap ( ?(<CR>:noh<CR>
+" nnoremap ) /)<CR>:noh<CR>
 " nnoremap [[ ?{<CR>:noh<CR>
 " nnoremap ][ /{<CR>:noh<CR>
 " nnoremap [] ?}<CR>:noh<CR>
