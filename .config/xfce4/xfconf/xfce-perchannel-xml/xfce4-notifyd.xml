@@ -37,7 +37,7 @@
   <property name="do-slideout" type="bool" value="true"/>
   <property name="notification-log" type="bool" value="true"/>
   <property name="do-not-disturb" type="bool" value="false"/>
-  <property name="expire-timeout" type="int" value="60"/>
+  <property name="expire-timeout" type="int" value="20"/>
   <property name="plugin" type="empty">
     <property name="log-only-today" type="bool" value="true"/>
   </property>
