@@ -141,7 +141,8 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 noremap <silent><expr> / incsearch#go(<SID>config_easyfuzzymotion())
-nmap ( <Plug>(easymotion-overwin-f)
+nmap <leader>i <Plug>(easymotion-overwin-f)
+
 
 " }}}
 
@@ -225,10 +226,13 @@ map <leader>a <Plug>(EasyAlign)
 
 " Fugitive {{{
 
-nnoremap <leader>gp V:'<,'>diffput<CR>
-vnoremap <leader>gp :'<,'>diffput<CR>
+" vnoremap dp :'<,'>diffput<CR>
+" vnoremap do :'<,'>diffget<CR>
 
 nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+
+set diffopt+=vertical
 
 " }}}
 

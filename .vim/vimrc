@@ -158,34 +158,34 @@ nnoremap <silent> <Leader>wj :exe "resize -10"<CR>
 
 nnoremap <C-]> g<C-]>
 nnoremap <C-}> :YcmCompleter GoToDeclaration<CR>
-nnoremap { ?{<CR>:noh<CR>
-nnoremap } /{<CR>:noh<CR>
+" nnoremap { ?{<CR>:noh<CR>
+" nnoremap } /{<CR>:noh<CR>
 " nnoremap ( ?(<CR>:noh<CR>
 " nnoremap ) /)<CR>:noh<CR>
 " nnoremap [[ ?{<CR>:noh<CR>
 " nnoremap ][ /{<CR>:noh<CR>
 " nnoremap [] ?}<CR>:noh<CR>
 " nnoremap ]] /}<CR>:noh<CR>
-nnoremap [[ ?{<CR>:noh<CR>
-nnoremap ]] /{<CR>:noh<CR>
-nnoremap ][ ?}<CR>:noh<CR>
-nnoremap [] /}<CR>:noh<CR>
-nnoremap [9 ?(<CR>:noh<CR>
-nnoremap ]9 /(<CR>:noh<CR>
-nnoremap [0 ?)<CR>:noh<CR>
-nnoremap ]0 /)<CR>:noh<CR>
-nnoremap [, ?<<CR>:noh<CR>
-nnoremap ], /<<CR>:noh<CR>
-nnoremap [. ?><CR>:noh<CR>
-nnoremap ]. /><CR>:noh<CR>
-nnoremap [{ ?[<CR>:noh<CR>
-nnoremap ]{ /[<CR>:noh<CR>
-nnoremap [} ?]<CR>:noh<CR>
-nnoremap ]} /]<CR>:noh<CR>
-nnoremap [' ?"<CR>:noh<CR>
-nnoremap ]' /"<CR>:noh<CR>
-nnoremap [" ?'<CR>:noh<CR>
-nnoremap ]" /'<CR>:noh<CR>
+" nnoremap [[ ?{<CR>:noh<CR>
+" nnoremap ]] /{<CR>:noh<CR>
+" nnoremap ][ ?}<CR>:noh<CR>
+" nnoremap [] /}<CR>:noh<CR>
+" nnoremap [9 ?(<CR>:noh<CR>
+" nnoremap ]9 /(<CR>:noh<CR>
+" nnoremap [0 ?)<CR>:noh<CR>
+" nnoremap ]0 /)<CR>:noh<CR>
+" nnoremap [, ?<<CR>:noh<CR>
+" nnoremap ], /<<CR>:noh<CR>
+" nnoremap [. ?><CR>:noh<CR>
+" nnoremap ]. /><CR>:noh<CR>
+" nnoremap [{ ?[<CR>:noh<CR>
+" nnoremap ]{ /[<CR>:noh<CR>
+" nnoremap [} ?]<CR>:noh<CR>
+" nnoremap ]} /]<CR>:noh<CR>
+" nnoremap [' ?"<CR>:noh<CR>
+" nnoremap ]' /"<CR>:noh<CR>
+" nnoremap [" ?'<CR>:noh<CR>
+" nnoremap ]" /'<CR>:noh<CR>
 
 " }}}
 
