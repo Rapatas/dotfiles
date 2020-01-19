@@ -132,6 +132,13 @@ augroup Binary
   au BufWritePost *.bin set nomod | endif
 augroup END
 
+" Set markers to the last filetype I visit
+autocmd BufLeave *.cpp,*.c   normal! mC
+autocmd BufLeave *.h,*.hpp   normal! mH
+autocmd BufLeave *.md        normal! mM
+autocmd BufLeave *.txt       normal! mT
+autocmd BufLeave vimrc,*.vim normal! mV
+
 " Auto behavior }}}
 
 " Custom keybindings {{{

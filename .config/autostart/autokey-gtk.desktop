@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=AutoKey Applet
+Exec=autokey-gtk
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+

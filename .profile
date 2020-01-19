@@ -8,18 +8,3 @@
 
 # Colors!!
 export TERM=xterm-256color
-
-# Map Control to Caps
-setxkbmap -layout us -option ctrl:nocaps
-
-# Autostart
-if xset q &> /dev/null; then
-  autokey-gtk &
-  $HOME/bin/settings/mouse/HVTG587_deceleration.sh &
-  $HOME/bin/settings/mouse/PixArtMicrosoft_deceleration.sh &
-  $HOME/bin/settings/mouse/PixArtGaming_deceleration.sh &
-  sxhkd &
-  tilda &
-  ulauncher &
-fi
-

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=Tilda
+Exec=tilda
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

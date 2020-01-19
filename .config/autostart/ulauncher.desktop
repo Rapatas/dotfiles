@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Name=U-Launcher
+Exec=ulauncher
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
