@@ -111,23 +111,43 @@ $2
 endsnippet
 
 snippet fre "std::for_each" i
-std::for_each(std::begin($1), std::end($1), $2);
+std::for_each(
+	std::begin($1), 
+	std::end($1), 
+	$2
+);
 endsnippet
 
 snippet find "std::find" i
-auto $1 = std::find(std::begin($2), std::end($2), $3);
+auto $1 = std::find(
+	std::begin($2),
+	std::end($2),
+	$3
+);
 endsnippet
 
 snippet findi "std::find_if" i
-auto $1 = std::find_if(std::begin($2), std::end($2), $2);
+auto $1 = std::find_if(
+	std::begin($2),
+	std::end($2),
+	$2
+);
 endsnippet
 
 snippet findin "std::find_if_not" i
-auto $1 = std::find_if_not(std::begin($2), std::end($2), $2);
+auto $1 = std::find_if_not(
+	std::begin($2), 
+	std::end($2),
+	$2
+);
 endsnippet
 
 snippet remi "std::remove_if" i
-std::remove_if(std::begin($2), std::end($2), $2);
+std::remove_if(
+	std::begin($2),
+	std::end($2),
+	$2
+);
 endsnippet
 
 snippet swap "std::swap" i
@@ -155,5 +175,11 @@ std::reverse(std::begin($1), std::end($1));
 endsnippet
 
 snippet sort "std::sort" i
-std::sort(std::begin($1), std::end($1), $2);
+std::sort(
+	std::begin($1), 
+	std::end($1), 
+	$2
+);
 endsnippet
+
+
