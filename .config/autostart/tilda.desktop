@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Name=Tilda
-Exec=tilda
+Exec=sh -c "sleep 2; exec tilda"
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true
