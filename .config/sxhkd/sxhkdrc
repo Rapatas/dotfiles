@@ -17,19 +17,19 @@ ctrl + alt + Delete
   xkill
 
 super + 1
-  ./bin/launcher/internet.sh
+  ./bin/launcher/launcher.sh Firefox firefox
 super + 2
   ./bin/launcher/thunar.sh
 super + 3
-  ./bin/launcher/terminal.sh
+  ./bin/launcher/launcher.sh Xfce4-terminal xfce4-terminal
 super + 4
 super + 5
 super + 6
-  ./bin/launcher/signal.sh
+  ./bin/launcher/launcher.sh 
 super + 7
-  ./bin/launcher/discord.sh
+  ./bin/launcher/launcher.sh Discord /usr/bin/discord
 super + 8
-  ./bin/launcher/slack.sh
+  ./bin/launcher/launcher.sh Slack slack
 super + 9
 super + 0
-  ./bin/launcher/spotify.sh
+  ./bin/launcher/launcher.sh Spotify spotify
