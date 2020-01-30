@@ -117,6 +117,7 @@
     alias dfs='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME status'
     alias dfc='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME commit -m'
     alias dfd='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME diff'
+    alias dfl="git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
   # }
 
