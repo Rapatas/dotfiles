@@ -15,7 +15,7 @@ Plug 'AndrewRadev/switch.vim' " Lazy <space>-
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'tpope/vim-surround' " Use n:cs({ v:S) n:ds) n:ysiw]
+Plug 'machakann/vim-sandwich' " sa{motion/textobject}{addition} saiw( / sdb / sd(
 Plug 'junegunn/vim-easy-align' " <space>a*=
 Plug 'lfilho/cosco.vim' " <space>;
 Plug 'tpope/vim-sensible'
