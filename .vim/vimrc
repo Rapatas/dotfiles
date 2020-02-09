@@ -7,7 +7,6 @@ if $CONTEXT == "amco"
 elseif $CONTEXT == "amcol"
 	let g:indent_size=4
 	set textwidth=132
-
 else
 	let g:indent_size=2
 	set textwidth=80
@@ -17,8 +16,420 @@ endif
 " }}}
 
 let mapleader = "\<space>"
-source ~/.vim/plugins.vim
-source ~/.vim/indentation.vim
+
+" Indentation {{{
+
+" Indent means 4
+let &shiftwidth = g:indent_size
+
+" What to do when you press TAB (Must be the same as tabstop)
+let &softtabstop = g:indent_size
+
+" How to display a tab Character
+let &tabstop = g:indent_size
+
+" Round indent to multiple of 'shiftwidth'
+set shiftround
+
+" Stop inserting new lines at long lines
+set formatoptions-=t
+
+" Cinoptions {{{
+
+" Normal indentation
+set cinoptions=>1s
+
+" Place Jump Labels at column 0
+set cinoptions+=L-1
+
+" Place "case" one level after switch, 
+" This only applies to the case header
+set cinoptions+=:1s
+
+" Place blocks in switch correctly
+set cinoptions+=l1
+
+" Place c++ scope to col 0
+set cinoptions+=g0
+
+" Place return type at col 0, when the function is global
+set cinoptions+=t0
+
+" Place base class
+set cinoptions+=i1s
+
+" Place Continuation line
+set cinoptions+=+1s
+
+" Place multi-line comments
+set cinoptions+=c1s,C1s
+
+" indent unclosed parens
+set cinoptions+=(1s,u1s,U1s
+
+" FIX closing paren
+set cinoptions+=m1
+
+" FIX Lambdas
+set cinoptions+=j1
+
+" Dont indent namespace
+" indent negative
+set cinoptions+=N-s
+
+" }}}
+
+" HTML {{{
+
+" HTML better ENTER
+function! Expander()
+  let line   = getline(".")
+  let col    = col(".")
+  let first  = line[col-2]
+  let second = line[col-1]
+  let third  = line[col]
+
+  if first ==# ">"
+    if second ==# "<" && third ==# "/"
+      return "\<CR>\<C-o>==\<C-o>O"
+    else
+      return "\<CR>"
+    endif
+  else
+    return "\<CR>"
+  endif
+endfunction
+
+inoremap <expr> <CR> Expander()
+
+" }}}
+
+" C++ {{{
+
+" If previous non-empty line is template, return the indentation of that line
+function! Dont_indent_templates()
+
+  let curr_line_num = line('.')
+  let prev_line_num = prevnonblank(curr_line_num - 1)
+  let prev_line = getline(prev_line_num)
+
+  if prev_line =~# '^\s*template.*'
+    let ret_val = indent(prev_line_num)
+  else
+    let ret_val = cindent(curr_line_num)
+  endif
+
+  return ret_val
+endfunction
+
+if has("autocmd")
+  autocmd BufEnter *.{cc,cxx,cpp,h,hh,hpp,hxx} setlocal indentexpr=Dont_indent_templates()
+endif
+
+" }}}
+
+" Markdown {{{
+
+" Markdown spaces
+autocmd BufRead,BufNewFile *.md setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
+
+" }}}
+
+" }}}
+
+" Plugins {{{
+
+set nocompatible
+
+" Plugged {{{
+
+call plug#begin('~/.vim/plugged')
+
+" Utils
+Plug 'jiangmiao/auto-pairs' " Better pair insertion
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'machakann/vim-sandwich' " sa{motion/textobject}{addition} saiw( / sdb / sd(
+Plug 'junegunn/vim-easy-align' " <space>a*=
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-repeat' " Fix . for plugins
+Plug 'mileszs/ack.vim'
+Plug 'Valloric/ListToggle' " <space>tl / tq
+Plug 'lfilho/cosco.vim'
+" Auto Complete
+" Load YCM only when I try to type something {{{
+
+function! YCMInstall(info)
+  if a:info.status == 'installed'
+    !./install.sh --clang-completer
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('YCMInstall')  }
+augroup load_ycm
+  autocmd!
+  autocmd! InsertEnter *
+        \ call plug#load('YouCompleteMe')     |
+        \ if exists('g:loaded_youcompleteme') |
+        \   call youcompleteme#Enable()       |
+        \ endif                               |
+        \ autocmd! load_ycm
+augroup END
+
+" }}}
+Plug 'mattn/emmet-vim'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'vim-scripts/taglist.vim'
+Plug 'xolox/vim-misc'
+" Move
+Plug 'Lokaltog/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+" Plug 'wikitopian/hardmode'
+" Syntax
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'ap/vim-css-color'
+Plug 'peterhoeg/vim-qml'
+Plug 'pboettch/vim-cmake-syntax'
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+" Plug 'octol/vim-cpp-enhanced-highlight'
+" Visual Candy
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'ryanoasis/vim-devicons'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'luochen1990/rainbow'
+" let g:rainbow_active = 1
+" Navigation
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf.vim'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'christoomey/vim-tmux-navigator'
+" Comments
+Plug 'scrooloose/nerdcommenter'
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Initialize plugin system
+call plug#end()
+
+" }}}
+
+" Markdown {{{
+
+nnoremap <space>tm :Toc<cr>
+
+" }}}
+
+" Cosco {{{
+
+autocmd FileType javascript,css,cpp nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
+autocmd FileType javascript,css,cpp imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
+
+" }}}
+
+" Airline {{{
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='minimalist'
+" let g:airline_theme='dark'
+
+" }}}
+
+" Switch {{{
+
+let g:switch_mapping = "<leader>-"
+
+" }}}
+
+" Goyo {{{
+
+map <leader>F :Goyo<CR>
+
+" }}}
+
+" EasyMotion {{{
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+        \   'converters': [incsearch#config#fuzzyword#converter()],
+        \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
+        \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+        \   'is_expr': 0,
+        \   'is_stay': 1
+        \ }), get(a:, 1, {}))
+endfunction
+
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+noremap <silent><expr> ? incsearch#go(<SID>config_easyfuzzymotion())
+
+" Bidirectional
+nmap F <Plug>(easymotion-bd-f)
+nmap <leader><leader>f <Plug>(easymotion-overwin-f)
+
+" }}}
+
+" Nerd Commenter {{{
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDCommenterToggle = '<leader>/'
+" nnoremap <leader>/ <Plug>NERDCommenterToggle'n', 'Toggle')<Cr>
+nmap <C-_>   <Plug>NERDCommenterToggle
+vmap <C-_>   <Plug>NERDCommenterToggle gv
+" Doxygen
+nnoremap <leader>cd :Dox<CR>
+
+" }}}
+
+" Nerd Tree {{{
+
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpNextSibling='J'
+let g:NERDTreeMapJumpPrevSibling='K'
+let g:NERDTreeMapOpenVSplit='v'
+let g:NERDTreeMapOpenSplit='h'
+
+map <leader>tf :NERDTreeFind<CR>
+map <F4> :NERDTreeToggle<CR>
+
+" autocmd StdinReadPre * let s:std_in=1
+
+" Open NerdTree when opening a dir
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" Open NerdTree when no file is selected
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+" }}}
+
+" You Complete Me (ycm) {{{
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_seed_identifiers_with_syntax = 1
+" Place errors in location list
+let g:ycm_always_populate_location_list = 1
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_max_diagnostics_to_display = 0
+
+nnoremap <leader>yf :YcmCompleter FixIt<CR>
+nnoremap <leader>yt :YcmCompleter GetType<CR>
+nnoremap gd <C-]>
+nnoremap gh :YcmCompleter GoToDeclaration<CR>
+
+" Next - Prev 
+nnoremap <C-]> g<C-]>
+nnoremap <C-}> :YcmCompleter GoToDeclaration<CR>
+
+" }}}
+
+" UltiSnips {{{
+
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsListSnippets = '<C-l>'
+let g:user_emmet_expandabbr_key = '<leader><tab>'
+
+" }}}
+
+" Easy Align {{{
+
+map <leader>a <Plug>(EasyAlign)
+
+" }}}
+
+" Fugitive {{{
+
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+
+set diffopt+=vertical
+
+" }}}
+
+" Surround {{{
+
+nnoremap <leader>si ys
+nnoremap <leader>sc cs
+nnoremap <leader>sd ds
+vnoremap <leader>s S
+
+" }}}
+
+" Taglist {{{
+
+" Toggle taglist
+let Tlist_Use_Right_Window   = 1
+let Tlist_WinWidth = 50
+nnoremap <leader>tt :TlistToggle<CR>
+
+let g:lt_location_list_toggle_map = '<leader>tl'
+let g:lt_quickfix_list_toggle_map = '<leader>tq'
+let g:lt_height = 10
+
+" }}}
+
+" Easy Tags {{{
+
+let g:easytags_async = 1
+let g:easytags_opts = ['--fields=+l']
+
+set tags=tags;
+let g:easytags_dynamic_files = 1
+
+" }}}
+
+" fzf {{{
+
+nnoremap <C-P> :Files<CR>
+
+" }}}
+
+" ack {{{
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" }}}
+
+" Multiple cursorrs {{{
+
+nnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+vnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+
+" }}}
+
+" }}}
 
 " Colors {{{
 
@@ -109,16 +520,42 @@ set autoread
 " Disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=r formatoptions-=c formatoptions-=o
 
-" Update taglist every time I move
-autocmd CursorMoved * silent! TlistHighlightTag
-
-" autocmd CursorMovedI * silent! TlistHighlightTag
+" Auto unfold on cursor position when opening file
+if has("folding")
+  function! UnfoldCur()
+    if !&foldenable
+      return
+    endif
+    let cl = line(".")
+    if cl <= 1
+      return
+    endif
+    let cf  = foldlevel(cl)
+    let uf  = foldlevel(cl - 1)
+    let min = (cf > uf ? uf : cf)
+    if min
+      execute "normal!" min . "zo"
+      return 1
+    endif
+  endfunction
+endif
 
 " Restore cursor position when opening same file
-autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal! g`\"" |
-	\ endif
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup resCur
+  autocmd!
+  if has("folding")
+    autocmd BufWinEnter * if ResCur() | call UnfoldCur() | endif
+  else
+    autocmd BufWinEnter * call ResCur()
+  endif
+augroup END
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -154,47 +591,6 @@ nnoremap <Leader>w+ <C-W>=
 
 " Window to tab
 nnoremap <silent> <Leader>wt :tab split<CR>
-
-" Easier pane resize
-nnoremap <silent> <Leader>wl :exe "vertical resize +10"<CR>
-nnoremap <silent> <Leader>wh :exe "vertical resize -10"<CR>
-nnoremap <silent> <Leader>wk :exe "resize +10"<CR>
-nnoremap <silent> <Leader>wj :exe "resize -10"<CR>
-
-" Next - Prev {{{
-
-nnoremap <C-]> g<C-]>
-nnoremap <C-}> :YcmCompleter GoToDeclaration<CR>
-" nnoremap { ?{<CR>:noh<CR>
-" nnoremap } /{<CR>:noh<CR>
-" nnoremap ( ?(<CR>:noh<CR>
-" nnoremap ) /)<CR>:noh<CR>
-" nnoremap [[ ?{<CR>:noh<CR>
-" nnoremap ][ /{<CR>:noh<CR>
-" nnoremap [] ?}<CR>:noh<CR>
-" nnoremap ]] /}<CR>:noh<CR>
-" nnoremap [[ ?{<CR>:noh<CR>
-" nnoremap ]] /{<CR>:noh<CR>
-" nnoremap ][ ?}<CR>:noh<CR>
-" nnoremap [] /}<CR>:noh<CR>
-" nnoremap [9 ?(<CR>:noh<CR>
-" nnoremap ]9 /(<CR>:noh<CR>
-" nnoremap [0 ?)<CR>:noh<CR>
-" nnoremap ]0 /)<CR>:noh<CR>
-" nnoremap [, ?<<CR>:noh<CR>
-" nnoremap ], /<<CR>:noh<CR>
-" nnoremap [. ?><CR>:noh<CR>
-" nnoremap ]. /><CR>:noh<CR>
-" nnoremap [{ ?[<CR>:noh<CR>
-" nnoremap ]{ /[<CR>:noh<CR>
-" nnoremap [} ?]<CR>:noh<CR>
-" nnoremap ]} /]<CR>:noh<CR>
-" nnoremap [' ?"<CR>:noh<CR>
-" nnoremap ]' /"<CR>:noh<CR>
-" nnoremap [" ?'<CR>:noh<CR>
-" nnoremap ]" /'<CR>:noh<CR>
-
-" }}}
 
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
@@ -258,17 +654,7 @@ map <leader>/ :noh<cr>
 " Trim whitespace
 nnoremap <leader>dt :%s/\s\+$//e<cr>
 
-" Auto-trim whitespace on cpp/h files
-" autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
-
-" Go up the tags
-" nnoremap <C-> <C-t>
-
 " Pasta {{{
-
-" noremap <Leader>p "0p
-" noremap <Leader>P "0P
-" vnoremap p "0p
 
 function! s:NormalPasta(p, o)
   if (getregtype() ==# "V")
@@ -361,3 +747,20 @@ augroup SourceCode
 augroup SourceCode
 
 " }}}
+
+" TODO {{{
+
+" Update taglist every time I move
+" autocmd CursorMoved * silent! TlistHighlightTag
+
+" Auto-trim whitespace on cpp/h files
+" autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" filetype off
+" filetype plugin indent on
+" syntax enable
+
+" Extract useful pairs from
+" Plug 'tpope/vim-unimpaired'
+
+" }}} 
