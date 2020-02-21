@@ -1,13 +1,4 @@
 {
-    "ebc542f9-a6cb-4508-9e81-ad0c9988b019": {
-        "added": 1556986676.06964, 
-        "name": "Google Search", 
-        "keyword": "g", 
-        "cmd": "https://google.com/search?q=%s", 
-        "is_default_search": true, 
-        "id": "ebc542f9-a6cb-4508-9e81-ad0c9988b019", 
-        "icon": "/usr/share/ulauncher/media/google-search-icon.png"
-    }, 
     "15dd620c-b522-4174-9d8b-d765b75c9faf": {
         "added": 1556986820.087244, 
         "name": "DuckDuckGo", 
@@ -15,6 +6,15 @@
         "cmd": "https://duckduckgo.com/", 
         "is_default_search": true, 
         "id": "15dd620c-b522-4174-9d8b-d765b75c9faf", 
+        "icon": null
+    }, 
+    "30cc62fb-5262-4083-9ea3-846296c1d9bc": {
+        "added": 1581687690.530711, 
+        "name": "GitLab (amco)", 
+        "keyword": "g", 
+        "cmd": "http://rnd.amco.gr:8082/gitlab/explore/projects?utf8=\u2713&sort=latest_activity_desc&name=%s", 
+        "is_default_search": false, 
+        "id": "30cc62fb-5262-4083-9ea3-846296c1d9bc", 
         "icon": null
     }, 
     "ada308f7-cd6a-4d01-99fd-4664c680b3eb": {
