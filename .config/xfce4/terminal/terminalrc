@@ -2,7 +2,7 @@
 ColorForeground=#b7b7b7
 ColorBackground=#000000000000
 ColorCursor=#eeeeeeeeecec
-ColorSelection=#163b59
+ColorSelection=#ffffffffffff
 ColorSelectionUseDefault=FALSE
 ColorBold=#ffffff
 ColorBoldUseDefault=FALSE
@@ -40,4 +40,5 @@ ScrollingUnlimited=TRUE
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=0,800000
 ColorCursorUseDefault=FALSE
+ColorSelectionBackground=#555557575353
 
