@@ -195,7 +195,7 @@ Plug 'pboettch/vim-cmake-syntax'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-" Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight'
 " Visual Candy
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -738,6 +738,8 @@ augroup SourceCode
 	" Swap lines (needs cosco)
 	autocmd FileType javascript,css,cpp nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
 	autocmd FileType javascript,css,cpp nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
+    autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/qt5
+    autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/system
 
 	" Folding
 	autocmd FileType javascript,css,cpp,c setlocal foldmarker={,}
