@@ -68,6 +68,7 @@
     alias la='ls --group-directories-first --color -lAlshN'
     alias ls='ls --group-directories-first --color -lhN'
     alias tree='tree --dirsfirst -I build --noreport'
+    alias maj='make -j $(nproc)'
 
     # ranger quits to current dir
     alias ranger='ranger --choosedir=$HOME/.config/ranger/lastrangerdir; LASTDIR=`cat $HOME/.config/ranger/lastrangerdir`; cd "$LASTDIR"'
