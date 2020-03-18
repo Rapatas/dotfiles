@@ -379,8 +379,9 @@ set diffopt+=vertical
 
 " Fast Fold {{{
 
-" nmap zuz <Plug>(FastFoldUpdate)
-" let g:fastfold_savehook = 1
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_force = 1
+let g:fastfold_savehook = 1
 
 " }}}
 
