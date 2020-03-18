@@ -157,6 +157,7 @@ Plug 'tpope/vim-repeat' " Fix . for plugins
 Plug 'mileszs/ack.vim'
 Plug 'Valloric/ListToggle' " <space>tl / tq
 Plug 'lfilho/cosco.vim'
+Plug 'Konfekt/FastFold'
 " Auto Complete
 " Load YCM only when I try to type something {{{
 
@@ -376,6 +377,13 @@ set diffopt+=vertical
 
 " }}}
 
+" Fast Fold {{{
+
+" nmap zuz <Plug>(FastFoldUpdate)
+" let g:fastfold_savehook = 1
+
+" }}}
+
 " Surround {{{
 
 nnoremap <leader>si ys
@@ -467,7 +475,7 @@ nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
 
 set number
 set encoding=UTF-8
-set timeoutlen=500
+set timeoutlen=2000
 set hidden
 set ttimeoutlen=0
 set viminfo+=n~/.vim/viminfo
@@ -738,8 +746,8 @@ augroup SourceCode
 	" Swap lines (needs cosco)
 	autocmd FileType javascript,css,cpp nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
 	autocmd FileType javascript,css,cpp nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
-    autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/qt5
-    autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/system
+  autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/qt5
+  autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/system
 
 	" Folding
 	autocmd FileType javascript,css,cpp,c setlocal foldmarker={,}
