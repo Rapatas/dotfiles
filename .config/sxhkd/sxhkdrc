@@ -25,11 +25,11 @@ super + 3
 super + 4
 super + 5
 super + 6
-  ./bin/launcher/launcher.sh 
+./bin/launcher/launcher.sh Discord /snap/bin/discord
 super + 7
-  ./bin/launcher/launcher.sh Discord /usr/bin/discord
 super + 8
   ./bin/launcher/launcher.sh Slack slack
 super + 9
+  ./bin/launcher/launcher.sh Skype skypeforlinux
 super + 0
   ./bin/launcher/launcher.sh Spotify spotify
