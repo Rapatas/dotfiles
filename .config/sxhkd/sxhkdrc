@@ -25,7 +25,7 @@ super + 3
 super + 4
 super + 5
 super + 6
-./bin/launcher/launcher.sh Discord /snap/bin/discord
+  ./bin/launcher/launcher.sh Discord /snap/bin/discord
 super + 7
 super + 8
   ./bin/launcher/launcher.sh Slack slack

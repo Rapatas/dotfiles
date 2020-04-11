@@ -46,7 +46,7 @@ fi
 # Bring window to focus.
 mapfile -t allofthem <<< "$exists_str"
 for id in "${allofthem[@]}"; do
-  [ -z $(xdotool windowactivate $id 2&>1) ] && true || exit 0
+  [ -z $(xdotool windowactivate $id 2&> /dev/null) ] && true || exit 0
 done
 
 exit 1
