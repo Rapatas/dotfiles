@@ -15,5 +15,9 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", \
     SYMLINK+="stm32_dfu"
 ' | sudo tee -a /etc/udev/rules.d/50-wally.rules
 
-wget -o ~/bin/wally https://configure.ergodox-ez.com/wally/linux
+wget \
+  -O ~/bin/wally \
+  --no-check-certificate \
+  https://configure.ergodox-ez.com/wally/linux
+
 chmod +x ~/bin/wally

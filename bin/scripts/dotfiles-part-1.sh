@@ -9,8 +9,7 @@ case $(tty) in /dev/tty[0-9]*)
     git clone --bare https://github.com/rapatas/dotfiles ~/.dotfiles/.git
 
     git --git-dir="$HOME/.dotfiles/.git" --work-tree="$HOME" checkout -f
-    git --git-dir="$HOME/.dotfiles/.git" --work-tree="$HOME" submodules init
-    git --git-dir="$HOME/.dotfiles/.git" --work-tree="$HOME" submodules update
+    git --git-dir="$HOME/.dotfiles/.git" --work-tree="$HOME" submodule update --init
 
     rm -rf ~/.cache/*
 

@@ -20,6 +20,7 @@ xargs -a <(sed '/^#.*$/d' ~/.dotfiles/snap-list) sudo snap install
 
 ~/bin/install/ulauncher.sh
 ~/bin/install/signal.sh
+~/bin/install/typora.sh
 ~/bin/install/fzf.sh
 ~/bin/install/ranger_devicons.sh
 ~/bin/install/vim.sh
@@ -31,7 +32,7 @@ tmux new-session -d
 tmux new-session "vim -c 'Tmuxline airline' -c 'TmuxlineSnapshot! ~/.tmux/theme_snapshot' -c 'q'"
 tmux kill-server
 
-~/bin/scripts/keygen.sh
+#~/bin/scripts/keygen.sh
 
 # Reset the sudo timeout to default
 sudo rm /etc/sudoers.d/timeout
