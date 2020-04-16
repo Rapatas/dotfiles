@@ -1,5 +1,8 @@
 #!/bin/bash
 
+dotfiles config user.name "Andy Rapatas"
+dotfiles config user.email "15367779+Rapatas@users.noreply.github.com"
+
 # Delete hist commands from .bashrc
 sed -i '/HISTSIZE=/d' ~/.bashrc
 sed -i '/HISTFILESIZE=/d' ~/.bashrc
@@ -22,6 +25,10 @@ xargs -a <(sed '/^#.*$/d' ~/.dotfiles/snap-list) sudo snap install
 ~/bin/install/signal.sh
 ~/bin/install/typora.sh
 ~/bin/install/fzf.sh
+~/bin/install/steam.sh
+~/bin/install/slack.sh
+~/bin/install/wally.sh
+~/bin/install/conan.sh
 ~/bin/install/ranger_devicons.sh
 ~/bin/install/vim.sh
 ~/bin/install/tild-ah.sh

@@ -21,3 +21,16 @@ wget \
   https://configure.ergodox-ez.com/wally/linux
 
 chmod +x ~/bin/wally
+
+mkdir -p ~/.local/share/applications
+
+echo "
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Exec=$HOME/bin/wally
+Name=Wally - Ergodox EZ
+" > ~/.local/share/applications/wally.desktop
+

@@ -163,19 +163,22 @@ Plug 'Konfekt/FastFold'
 
 function! YCMInstall(info)
   if a:info.status == 'installed'
-    !./install.sh --clang-completer
+    !python3 install.py --clang-completer
   endif
 endfunction
-Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('YCMInstall')  }
-augroup load_ycm
-  autocmd!
-  autocmd! InsertEnter *
-        \ call plug#load('YouCompleteMe')     |
-        \ if exists('g:loaded_youcompleteme') |
-        \   call youcompleteme#Enable()       |
-        \ endif                               |
-        \ autocmd! load_ycm
-augroup END
+
+" Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('YCMInstall')  }
+Plug 'Valloric/YouCompleteMe', { 'do': function('YCMInstall')  }
+
+" augroup load_ycm
+"   autocmd!
+"   autocmd! InsertEnter *
+"         \ call plug#load('YouCompleteMe')     |
+"         \ if exists('g:loaded_youcompleteme') |
+"         \   call youcompleteme#Enable()       |
+"         \ endif                               |
+"         \ autocmd! load_ycm
+" augroup END
 
 " }}}
 Plug 'mattn/emmet-vim'

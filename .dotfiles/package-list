@@ -2,6 +2,7 @@
 # Management {
 
   snapd
+  sshpass
   mercurial
   synaptic
   gparted
@@ -19,6 +20,8 @@
   valgrind
   libsfml-dev
   doxygen
+  curl
+  g++-8
   graphviz
   build-essential
   highlight
