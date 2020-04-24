@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -f ~/.ssh/$USER@$HOSTNAME.rsa ]; then
   echo "You must create RSA keys for user: $USER now!"
   exit 1
 fi
 
-sudo apt-get install libpam-google-authenticator fail2ban
+sudo apt-get openssh-seerver install libpam-google-authenticator fail2ban
 
 cd /etc/ssh
 sudo rm ssh_host_*key
