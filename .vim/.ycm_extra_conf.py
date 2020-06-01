@@ -5,7 +5,6 @@ import ycm_core
 flags = [
     '-Wall',
     '-Wextra',
-    '-Werror',
     '-fexceptions',
     '-DNDEBUG',
     # THIS IS IMPORTANT! Without a "-std=<something>" flag, clang won't know which
