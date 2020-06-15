@@ -1,16 +1,16 @@
 " Context {{{
 
 if $CONTEXT == "amco"
-	let g:indent_size=4
-	set textwidth=80
-	set expandtab
+  let g:indent_size=4
+  set textwidth=80
+  set expandtab
 elseif $CONTEXT == "amcol"
-	let g:indent_size=4
-	set textwidth=132
+  let g:indent_size=4
+  set textwidth=132
 else
-	let g:indent_size=2
-	set textwidth=80
-	set expandtab
+  let g:indent_size=2
+  set textwidth=80
+  set expandtab
 endif
 
 " }}}
@@ -42,7 +42,7 @@ set cinoptions=>1s
 " Place Jump Labels at column 0
 set cinoptions+=L-1
 
-" Place "case" one level after switch, 
+" Place "case" one level after switch,
 " This only applies to the case header
 set cinoptions+=:1s
 
@@ -349,7 +349,7 @@ nnoremap <leader>yt :YcmCompleter GetType<CR>
 nnoremap gd <C-]>
 nnoremap gh :YcmCompleter GoToDeclaration<CR>
 
-" Next - Prev 
+" Next - Prev
 nnoremap <C-]> g<C-]>
 nnoremap <C-}> :YcmCompleter GoToDeclaration<CR>
 
@@ -515,11 +515,11 @@ set wrap
 
 set mouse=a
 " Hide the mouse cursor while typing
-set mousehide      
+set mousehide
 if has("mouse_sgr")
-	set ttymouse=sgr
+  set ttymouse=sgr
 else
-	set ttymouse=xterm2
+  set ttymouse=xterm2
 end
 
 " General }}}
@@ -663,6 +663,11 @@ vnoremap > >gv
 " Clear search highlight
 map <leader>/ :noh<cr>
 
+" Use tmux keys for opening splits
+
+nnoremap <leader>= :vnew<cr>
+nnoremap <leader>- :new<cr>
+
 " Trim whitespace
 nnoremap <leader>dt :%s/\s\+$//e<cr>
 
@@ -745,18 +750,18 @@ augroup END
 " Per file {{{
 
 augroup SourceCode
-	autocmd!
+  autocmd!
 
-	" Swap lines (needs cosco)
-	autocmd FileType javascript,css,cpp nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
-	autocmd FileType javascript,css,cpp nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
+  " Swap lines (needs cosco)
+  autocmd FileType javascript,css,cpp nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
+  autocmd FileType javascript,css,cpp nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
   autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/qt5
   autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/system
 
-	" Folding
-	autocmd FileType javascript,css,cpp,c setlocal foldmarker={,}
-	autocmd FileType sass,html setlocal foldmethod=indent
-	autocmd FileType json setlocal foldmethod=syntax
+  " Folding
+  autocmd FileType javascript,css,cpp,c setlocal foldmarker={,}
+  autocmd FileType sass,html setlocal foldmethod=indent
+  autocmd FileType json setlocal foldmethod=syntax
 
 augroup SourceCode
 
@@ -777,4 +782,4 @@ augroup SourceCode
 " Extract useful pairs from
 " Plug 'tpope/vim-unimpaired'
 
-" }}} 
+" }}}
