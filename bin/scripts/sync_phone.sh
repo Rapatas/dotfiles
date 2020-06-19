@@ -4,6 +4,7 @@ set -e
 
 PWD=`pwd`
 ARCHIVE="/media/andy/MightyDrive/Inbox/Phone"
+mkdir $ARCHIVE
 
 if [[ $PWD != *"mtp"* ]]; then
   echo "Please run this script from the phone root."
@@ -25,25 +26,25 @@ declare -a paths=(
   "viber/media"
 )
 
-INTERNAL="Internal shared storage"
-
 echo "Copying..."
 for i in "${paths[@]}"
 do
-  rsync -a "$PWD/$INTERNAL/$i" "$ARCHIVE/" || true
+  rsync -a "$PWD/$i" "$ARCHIVE/" || true
 done
 
 echo "Copying complete! You can unmount the device."
 
 echo "Sorting..."
+cd "$ARCHIVE"
 
 # Internal
-cd "$ARCHIVE/Camera"
+cd Camera
 exiftool '-FileName<DateTimeOriginal' -d %Y/%m/%Y%m%d_%H%M%%+c.%%e .
 exiftool '-DateTimeOriginal<FileModifyDate' .
 rm *_original
 exiftool '-FileName<DateTimeOriginal' -d %Y/%m/%Y%m%d_%H%M%%+c.%%e .
-cp -r * "/media/andy/MightyDrive/Documents/Media/ARCHIVE/1. Internal"
+# n = don't overwrite.
+cp -rn * "/media/andy/MightyDrive/Documents/Media/ARCHIVE/1. Internal"
 cd ..
 rm -rf Camera
 
