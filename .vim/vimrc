@@ -158,27 +158,24 @@ Plug 'mileszs/ack.vim'
 Plug 'Valloric/ListToggle' " <space>tl / tq
 Plug 'lfilho/cosco.vim'
 Plug 'Konfekt/FastFold'
+
+" Extract useful pairs from
+Plug 'tpope/vim-unimpaired'
+
 " Auto Complete
 " Load YCM only when I try to type something {{{
 
-function! YCMInstall(info)
-  if a:info.status == 'installed'
-    !python3 install.py --clang-completer
-  endif
-endfunction
+Plug 'Valloric/YouCompleteMe', { 'on': [] }
 
-" Plug 'Valloric/YouCompleteMe', { 'on': [], 'do': function('YCMInstall')  }
-Plug 'Valloric/YouCompleteMe', { 'do': function('YCMInstall')  }
-
-" augroup load_ycm
-"   autocmd!
-"   autocmd! InsertEnter *
-"         \ call plug#load('YouCompleteMe')     |
-"         \ if exists('g:loaded_youcompleteme') |
-"         \   call youcompleteme#Enable()       |
-"         \ endif                               |
-"         \ autocmd! load_ycm
-" augroup END
+augroup load_ycm
+  autocmd!
+  autocmd! InsertEnter *
+        \ call plug#load('YouCompleteMe')     |
+        \ if exists('g:loaded_youcompleteme') |
+        \   call youcompleteme#Enable()       |
+        \ endif                               |
+        \ autocmd! load_ycm
+augroup END
 
 " }}}
 Plug 'mattn/emmet-vim'
@@ -234,8 +231,8 @@ nnoremap <space>tm :Toc<cr>
 
 " Cosco {{{
 
-autocmd FileType javascript,css,cpp nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
-autocmd FileType javascript,css,cpp imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
+autocmd FileType javascript,css,cpp nmap <silent> ;; <Plug>(cosco-commaOrSemiColon)
+autocmd FileType javascript,css,cpp imap <silent> ;; <c-o><Plug>(cosco-commaOrSemiColon)
 
 " }}}
 
@@ -321,37 +318,37 @@ let g:NERDTreeMapOpenSplit='h'
 map <leader>tf :NERDTreeFind<CR>
 map <F4> :NERDTreeToggle<CR>
 
-" autocmd StdinReadPre * let s:std_in=1
-
-" Open NerdTree when opening a dir
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" Open NerdTree when no file is selected
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
 " }}}
 
 " You Complete Me (ycm) {{{
 
+" At least use this config for new projcts
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_seed_identifiers_with_syntax = 1
-" Place errors in location list
-let g:ycm_always_populate_location_list = 1
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_complete_in_comments = 1
+
+" Stop asking me for confirmation
 let g:ycm_confirm_extra_conf = 0
+
+" Suggest language keywords
+let g:ycm_seed_identifiers_with_syntax = 1
+
+" Show all the errors!!!
 let g:ycm_max_diagnostics_to_display = 0
 
-nnoremap <leader>yf :YcmCompleter FixIt<CR>
-nnoremap <leader>yt :YcmCompleter GetType<CR>
-nnoremap gd <C-]>
-nnoremap gh :YcmCompleter GoToDeclaration<CR>
+" Close the preview window
+" let g:ycm_autoclose_preview_window_after_insertion = 1
 
-" Next - Prev
-nnoremap <C-]> g<C-]>
-nnoremap <C-}> :YcmCompleter GoToDeclaration<CR>
+" let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_comments = 1
+
+" Place errors in location list
+let g:ycm_always_populate_location_list = 1
+
+nnoremap gd :YcmCompleter GoToDefinition<CR>
+nnoremap gh :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter FixIt<CR>
+nnoremap gt :YcmCompleter GetType<CR>
+nnoremap gr :YcmCompleter GoToReferences<CR>
+" Use <C-]> for ctags.
 
 " }}}
 
@@ -361,7 +358,7 @@ let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:UltiSnipsListSnippets = '<C-l>'
-let g:user_emmet_expandabbr_key = '<leader><tab>'
+" let g:user_emmet_expandabbr_key = '<leader><tab>'
 
 " }}}
 
@@ -375,6 +372,8 @@ map <leader>a <Plug>(EasyAlign)
 
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
+vnoremap gp :diffput<CR>
+vnoremap gg :diffget<CR>
 
 set diffopt+=vertical
 
@@ -385,15 +384,6 @@ set diffopt+=vertical
 nmap zuz <Plug>(FastFoldUpdate)
 let g:fastfold_force = 1
 let g:fastfold_savehook = 1
-
-" }}}
-
-" Surround {{{
-
-nnoremap <leader>si ys
-nnoremap <leader>sc cs
-nnoremap <leader>sd ds
-vnoremap <leader>s S
 
 " }}}
 
@@ -638,7 +628,7 @@ nnoremap <silent> <Leader>f9 :set foldlevel=9<CR>
 
 " Save
 nnoremap <silent> <C-S> :w<CR>
-inoremap <silent> <C-S> :w<CR>
+inoremap <silent> <C-S> <esc>:w<CR>
 vnoremap <silent> <C-S> :w<CR>gv
 
 " Die
@@ -652,6 +642,9 @@ vnoremap v <Esc>
 
 " Toggle pastemode
 nnoremap <silent> <Leader>tp :setlocal paste!<CR>
+
+" Close preview window
+nnoremap <leader>tp :pclose<cr>
 
 " :W sudo saves the file
 command! W w !sudo tee % > /dev/null
@@ -779,7 +772,5 @@ augroup SourceCode
 " filetype plugin indent on
 " syntax enable
 
-" Extract useful pairs from
-" Plug 'tpope/vim-unimpaired'
 
 " }}}
