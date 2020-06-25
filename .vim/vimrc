@@ -146,39 +146,36 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 " Utils
-Plug 'jiangmiao/auto-pairs' " Better pair insertion
+Plug 'jiangmiao/auto-pairs'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
-Plug 'machakann/vim-sandwich' " sa{motion/textobject}{addition} saiw( / sdb / sd(
-Plug 'junegunn/vim-easy-align' " <space>a*=
+Plug 'machakann/vim-sandwich'
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-repeat' " Fix . for plugins
+Plug 'tpope/vim-repeat'
 Plug 'mileszs/ack.vim'
-Plug 'Valloric/ListToggle' " <space>tl / tq
+Plug 'Valloric/ListToggle'
 Plug 'lfilho/cosco.vim'
 Plug 'Konfekt/FastFold'
-
-" Extract useful pairs from
 Plug 'tpope/vim-unimpaired'
-
 " Auto Complete
+Plug 'Valloric/YouCompleteMe'
 " Load YCM only when I try to type something {{{
 
-Plug 'Valloric/YouCompleteMe', { 'on': [] }
+" Plug 'Valloric/YouCompleteMe', { 'on': [] }
 
-augroup load_ycm
-  autocmd!
-  autocmd! InsertEnter *
-        \ call plug#load('YouCompleteMe')     |
-        \ if exists('g:loaded_youcompleteme') |
-        \   call youcompleteme#Enable()       |
-        \ endif                               |
-        \ autocmd! load_ycm
-augroup END
+" augroup load_ycm
+"   autocmd!
+"   autocmd! InsertEnter *
+"         \ call plug#load('YouCompleteMe')     |
+"         \ if exists('g:loaded_youcompleteme') |
+"         \   call youcompleteme#Enable()       |
+"         \ endif                               |
+"         \ autocmd! load_ycm
+" augroup END
 
 " }}}
-Plug 'mattn/emmet-vim'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/taglist.vim'
@@ -282,7 +279,7 @@ noremap <silent><expr> ? incsearch#go(<SID>config_easyfuzzymotion())
 
 " Bidirectional
 nmap F <Plug>(easymotion-bd-f)
-nmap <leader><leader>f <Plug>(easymotion-overwin-f)
+nmap <leader>f <Plug>(easymotion-overwin-f)
 
 " }}}
 
@@ -298,12 +295,10 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
-let g:NERDCommenterToggle = '<leader>/'
-" nnoremap <leader>/ <Plug>NERDCommenterToggle'n', 'Toggle')<Cr>
+
+" That's actually CTRL + /
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle gv
-" Doxygen
-nnoremap <leader>cd :Dox<CR>
 
 " }}}
 
@@ -358,7 +353,6 @@ let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:UltiSnipsListSnippets = '<C-l>'
-" let g:user_emmet_expandabbr_key = '<leader><tab>'
 
 " }}}
 
@@ -614,17 +608,17 @@ vmap k gk
 
 nnoremap <CR> :
 
-" Folding
-nnoremap <silent> <Leader>f0 :set foldlevel=0<CR>
-nnoremap <silent> <Leader>f1 :set foldlevel=1<CR>
-nnoremap <silent> <Leader>f2 :set foldlevel=2<CR>
-nnoremap <silent> <Leader>f3 :set foldlevel=3<CR>
-nnoremap <silent> <Leader>f4 :set foldlevel=4<CR>
-nnoremap <silent> <Leader>f5 :set foldlevel=5<CR>
-nnoremap <silent> <Leader>f6 :set foldlevel=6<CR>
-nnoremap <silent> <Leader>f7 :set foldlevel=7<CR>
-nnoremap <silent> <Leader>f8 :set foldlevel=8<CR>
-nnoremap <silent> <Leader>f9 :set foldlevel=9<CR>
+" " Folding
+" nnoremap <silent> <Leader>f0 :set foldlevel=0<CR>
+" nnoremap <silent> <Leader>f1 :set foldlevel=1<CR>
+" nnoremap <silent> <Leader>f2 :set foldlevel=2<CR>
+" nnoremap <silent> <Leader>f3 :set foldlevel=3<CR>
+" nnoremap <silent> <Leader>f4 :set foldlevel=4<CR>
+" nnoremap <silent> <Leader>f5 :set foldlevel=5<CR>
+" nnoremap <silent> <Leader>f6 :set foldlevel=6<CR>
+" nnoremap <silent> <Leader>f7 :set foldlevel=7<CR>
+" nnoremap <silent> <Leader>f8 :set foldlevel=8<CR>
+" nnoremap <silent> <Leader>f9 :set foldlevel=9<CR>
 
 " Save
 nnoremap <silent> <C-S> :w<CR>
