@@ -11,137 +11,22 @@ else
   let g:indent_size=2
   set textwidth=80
   set expandtab
+  " Auto-trim whitespace on cpp/h files
+  autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
 endif
 
 " }}}
 
 let mapleader = "\<space>"
 
-" Indentation {{{
-
-" Indent means 4
-let &shiftwidth = g:indent_size
-
-" What to do when you press TAB (Must be the same as tabstop)
-let &softtabstop = g:indent_size
-
-" How to display a tab Character
-let &tabstop = g:indent_size
-
-" Round indent to multiple of 'shiftwidth'
-set shiftround
-
-" Stop inserting new lines at long lines
-set formatoptions-=t
-
-" Cinoptions {{{
-
-" Normal indentation
-set cinoptions=>1s
-
-" Place Jump Labels at column 0
-set cinoptions+=L-1
-
-" Place "case" one level after switch,
-" This only applies to the case header
-set cinoptions+=:1s
-
-" Place blocks in switch correctly
-set cinoptions+=l1
-
-" Place c++ scope to col 0
-set cinoptions+=g0
-
-" Place return type at col 0, when the function is global
-set cinoptions+=t0
-
-" Place base class
-set cinoptions+=i1s
-
-" Place Continuation line
-set cinoptions+=+1s
-
-" Place multi-line comments
-set cinoptions+=c1s,C1s
-
-" indent unclosed parens
-set cinoptions+=(1s,u1s,U1s
-
-" FIX closing paren
-set cinoptions+=m1
-
-" FIX Lambdas
-set cinoptions+=j1
-
-" Dont indent namespace
-" indent negative
-set cinoptions+=N-s
-
-" }}}
-
-" HTML {{{
-
-" HTML better ENTER
-function! Expander()
-  let line   = getline(".")
-  let col    = col(".")
-  let first  = line[col-2]
-  let second = line[col-1]
-  let third  = line[col]
-
-  if first ==# ">"
-    if second ==# "<" && third ==# "/"
-      return "\<CR>\<C-o>==\<C-o>O"
-    else
-      return "\<CR>"
-    endif
-  else
-    return "\<CR>"
-  endif
-endfunction
-
-inoremap <expr> <CR> Expander()
-
-" }}}
-
-" C++ {{{
-
-" If previous non-empty line is template, return the indentation of that line
-function! Dont_indent_templates()
-
-  let curr_line_num = line('.')
-  let prev_line_num = prevnonblank(curr_line_num - 1)
-  let prev_line = getline(prev_line_num)
-
-  if prev_line =~# '^\s*template.*'
-    let ret_val = indent(prev_line_num)
-  else
-    let ret_val = cindent(curr_line_num)
-  endif
-
-  return ret_val
-endfunction
-
-if has("autocmd")
-  autocmd BufEnter *.{cc,cxx,cpp,h,hh,hpp,hxx} setlocal indentexpr=Dont_indent_templates()
-endif
-
-" }}}
-
-" Markdown {{{
-
-" Markdown spaces
-autocmd BufRead,BufNewFile *.md setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
-
-" }}}
-
-" }}}
-
 " Plugins {{{
 
 set nocompatible
 
 " Plugged {{{
+
+filetype off
+filetype plugin indent off
 
 call plug#begin('~/.vim/plugged')
 
@@ -159,6 +44,7 @@ Plug 'Valloric/ListToggle'
 Plug 'lfilho/cosco.vim'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-unimpaired'
+Plug 'AndrewRadev/switch.vim'
 " Auto Complete
 Plug 'Valloric/YouCompleteMe'
 " Load YCM only when I try to type something {{{
@@ -200,10 +86,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'luochen1990/rainbow'
-" let g:rainbow_active = 1
 " Navigation
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
@@ -217,6 +99,9 @@ Plug 'airblade/vim-gitgutter'
 
 " Initialize plugin system
 call plug#end()
+
+filetype plugin indent on
+syntax on
 
 " }}}
 
@@ -238,13 +123,12 @@ autocmd FileType javascript,css,cpp imap <silent> ;; <c-o><Plug>(cosco-commaOrSe
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='minimalist'
-" let g:airline_theme='dark'
 
 " }}}
 
 " Switch {{{
 
-let g:switch_mapping = "<leader>-"
+let g:switch_mapping = "<leader>."
 
 " }}}
 
@@ -386,7 +270,9 @@ let g:fastfold_savehook = 1
 " Toggle taglist
 let Tlist_Use_Right_Window   = 1
 let Tlist_WinWidth = 50
+
 nnoremap <leader>tt :TlistToggle<CR>
+nnoremap <leader>T :TlistHighlightTag<CR>
 
 let g:lt_location_list_toggle_map = '<leader>tl'
 let g:lt_quickfix_list_toggle_map = '<leader>tq'
@@ -422,6 +308,126 @@ endif
 
 nnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
 vnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+
+" }}}
+
+" }}}
+
+" Indentation {{{
+
+" Indent means 4
+let &shiftwidth = g:indent_size
+
+" What to do when you press TAB (Must be the same as tabstop)
+let &softtabstop = g:indent_size
+
+" How to display a tab Character
+let &tabstop = g:indent_size
+
+" Round indent to multiple of 'shiftwidth'
+set shiftround
+
+" Stop inserting new lines at long lines
+set formatoptions-=t
+
+" Cinoptions {{{
+
+" Normal indentation
+set cinoptions=>1s
+
+" Place Jump Labels at column 0
+set cinoptions+=L-1
+
+" Place "case" one level after switch,
+" This only applies to the case header
+set cinoptions+=:1s
+
+" Place blocks in switch correctly
+set cinoptions+=l1
+
+" Place c++ scope to col 0
+set cinoptions+=g0
+
+" Place return type at col 0, when the function is global
+set cinoptions+=t0
+
+" Place base class
+set cinoptions+=i1s
+
+" Place Continuation line
+set cinoptions+=+1s
+
+" Place multi-line comments
+set cinoptions+=c1s,C1s
+
+" indent unclosed parens
+set cinoptions+=(1s,u1s,U1s
+
+" FIX closing paren
+set cinoptions+=m1
+
+" FIX Lambdas
+set cinoptions+=j1
+
+" Dont indent namespace
+" indent negative
+set cinoptions+=N-s
+
+" }}}
+
+" HTML {{{
+
+" HTML better ENTER
+function! Expander()
+  let line   = getline(".")
+  let col    = col(".")
+  let first  = line[col-2]
+  let second = line[col-1]
+  let third  = line[col]
+
+  if first ==# ">"
+    if second ==# "<" && third ==# "/"
+      return "\<CR>\<C-o>==\<C-o>O"
+    else
+      return "\<CR>"
+    endif
+  else
+    return "\<CR>"
+  endif
+endfunction
+
+inoremap <expr> <CR> Expander()
+
+" }}}
+
+" C++ {{{
+
+" If previous non-empty line is template, return the indentation of that line
+function! Dont_indent_templates()
+
+  let curr_line_num = line('.')
+  let prev_line_num = prevnonblank(curr_line_num - 1)
+  let prev_line = getline(prev_line_num)
+
+  if prev_line =~# '^\s*template.*'
+    let ret_val = indent(prev_line_num)
+  else
+    let ret_val = cindent(curr_line_num)
+  endif
+
+  return ret_val
+endfunction
+
+if has("autocmd")
+  autocmd BufEnter *.{cc,cxx,cpp,h,hh,hpp,hxx} setlocal indentexpr=Dont_indent_templates()
+endif
+
+" }}}
+
+" Markdown {{{
+
+" Markdown spaces
+autocmd BufRead,BufNewFile *.md setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
 
 " }}}
 
@@ -638,7 +644,7 @@ vnoremap v <Esc>
 nnoremap <silent> <Leader>tp :setlocal paste!<CR>
 
 " Close preview window
-nnoremap <leader>tp :pclose<cr>
+nnoremap <leader>p :pclose<cr>
 
 " :W sudo saves the file
 command! W w !sudo tee % > /dev/null
@@ -651,7 +657,6 @@ vnoremap > >gv
 map <leader>/ :noh<cr>
 
 " Use tmux keys for opening splits
-
 nnoremap <leader>= :vnew<cr>
 nnoremap <leader>- :new<cr>
 
@@ -659,6 +664,8 @@ nnoremap <leader>- :new<cr>
 nnoremap <leader>dt :%s/\s\+$//e<cr>
 
 " Pasta {{{
+
+" This adjusts indentation of paste text to match the destination.
 
 function! s:NormalPasta(p, o)
   if (getregtype() ==# "V")
@@ -740,31 +747,16 @@ augroup SourceCode
   autocmd!
 
   " Swap lines (needs cosco)
-  autocmd FileType javascript,css,cpp nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
-  autocmd FileType javascript,css,cpp nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
-  autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/qt5
-  autocmd FileType javascript,css,cpp setlocal tags+=~/.vim/tags/system
+  autocmd FileType javascript,css,cpp,c,hpp,h nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
+  autocmd FileType javascript,css,cpp,c,hpp,h nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
+  autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/qt5
+  autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/system
 
   " Folding
-  autocmd FileType javascript,css,cpp,c setlocal foldmarker={,}
+  autocmd FileType javascript,css,cpp,c,hpp,h setlocal foldmarker={,}
   autocmd FileType sass,html setlocal foldmethod=indent
   autocmd FileType json setlocal foldmethod=syntax
 
 augroup SourceCode
-
-" }}}
-
-" TODO {{{
-
-" Update taglist every time I move
-" autocmd CursorMoved * silent! TlistHighlightTag
-
-" Auto-trim whitespace on cpp/h files
-" autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
-
-" filetype off
-" filetype plugin indent on
-" syntax enable
-
 
 " }}}
