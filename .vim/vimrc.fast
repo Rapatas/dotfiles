@@ -1,0 +1,87 @@
+
+call plug#begin('~/.vim/plugged')
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'itchyny/lightline.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'Valloric/YouCompleteMe', { 'on': [] }
+call plug#end()
+
+autocmd VimEnter * call timer_start( 0, {
+			\ tid->execute('call plug#load("YouCompleteMe") | call youcompleteme#Enable()')
+			\ } )
+
+" augroup load_ycm
+"   autocmd!
+"   autocmd! GUIEnter " * 
+"         \ call plug#load('YouCompleteMe')     |
+"         \ if exists('g:loaded_youcompleteme') |
+"         \   call youcompleteme#Enable()       |
+"         \ endif                               |
+"         \ autocmd! load_ycm
+" augroup END
+
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_max_diagnostics_to_display = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_always_populate_location_list = 1
+
+
+
+
+" Always show status line.
+set laststatus=2
+" Show ruller.
+set number
+" Don't bother showing the current mode.
+set noshowmode
+
+
+" Folding
+set foldmethod=marker
+set foldmarker={{{,}}}
+" Starting folded makes it slower!
+set foldlevel=99
+
+nnoremap - za
+nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
+
+autocmd FileType javascript,css,cpp,c,hpp,h setlocal foldmarker={,}
+
+" Die
+map <C-Q> :qa!<CR>
+
+
+" Use 256 colors.
+set t_Co=256
+set bg=dark
+colorscheme mycol
+
+nnoremap <cr> :
+nnoremap <c-s> :w<cr>
+
+let g:lightline = {
+	\ 'component': {
+	\   'lineinfo': ' %3l:%-2v',
+	\ },
+        \ 'colorscheme': 'deus',
+	\ 'component_function': {
+	\   'readonly': 'LightlineReadonly',
+	\   'fugitive': 'LightlineFugitive'
+	\ },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '', 'right': '' }
+	\ }
+function! LightlineReadonly()
+	return &readonly ? '' : ''
+endfunction
+function! LightlineFugitive()
+	if exists('*FugitiveHead')
+		let branch = FugitiveHead()
+		return branch !=# '' ? ''.branch : ''
+	endif
+	return ''
+endfunction

@@ -1,32 +1,8 @@
-" Context {{{
-
-if $CONTEXT == "amco"
-  let g:indent_size=4
-  set textwidth=80
-  set expandtab
-elseif $CONTEXT == "amcol"
-  let g:indent_size=4
-  set textwidth=132
-else
-  let g:indent_size=2
-  set textwidth=80
-  set expandtab
-  " Auto-trim whitespace on cpp/h files
-  autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
-endif
-
-" }}}
-
 let mapleader = "\<space>"
 
 " Plugins {{{
 
-set nocompatible
-
 " Plugged {{{
-
-filetype off
-filetype plugin indent off
 
 call plug#begin('~/.vim/plugged')
 
@@ -41,7 +17,6 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'mileszs/ack.vim'
 Plug 'Valloric/ListToggle'
-Plug 'lfilho/cosco.vim'
 Plug 'Konfekt/FastFold'
 Plug 'tpope/vim-unimpaired'
 Plug 'AndrewRadev/switch.vim'
@@ -70,7 +45,7 @@ Plug 'xolox/vim-misc'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-" Plug 'wikitopian/hardmode'
+Plug 'wikitopian/hardmode'
 " Syntax
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ap/vim-css-color'
@@ -95,13 +70,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 " Initialize plugin system
 call plug#end()
-
-filetype plugin indent on
-syntax on
 
 " }}}
 
@@ -111,18 +83,14 @@ nnoremap <space>tm :Toc<cr>
 
 " }}}
 
-" Cosco {{{
-
-autocmd FileType javascript,css,cpp nmap <silent> ;; <Plug>(cosco-commaOrSemiColon)
-autocmd FileType javascript,css,cpp imap <silent> ;; <c-o><Plug>(cosco-commaOrSemiColon)
-
-" }}}
-
 " Airline {{{
 
+" let g:airline_extensions = []
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_highlighting_cache = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='minimalist'
+" set re=1
 
 " }}}
 
@@ -214,13 +182,13 @@ let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_max_diagnostics_to_display = 0
 
 " Close the preview window
-" let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_complete_in_comments = 1
 
 " Place errors in location list
-let g:ycm_always_populate_location_list = 1
+" let g:ycm_always_populate_location_list = 1
 
 nnoremap gd :YcmCompleter GoToDefinition<CR>
 nnoremap gh :YcmCompleter GoToDeclaration<CR>
@@ -248,7 +216,7 @@ map <leader>a <Plug>(EasyAlign)
 
 " Fugitive {{{
 
-nnoremap <leader>gs :Gstatus<CR>
+nmap <c-g> :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
 vnoremap gp :diffput<CR>
 vnoremap gg :diffget<CR>
@@ -260,8 +228,12 @@ set diffopt+=vertical
 " Fast Fold {{{
 
 nmap zuz <Plug>(FastFoldUpdate)
+" Prevent fold calculation on all foldmethods.
 let g:fastfold_force = 1
+" Trigger fold calculation on save.
 let g:fastfold_savehook = 1
+" Prevent fold calculation on all file sizes.
+let g:fastfold_minlines = 0
 
 " }}}
 
@@ -310,6 +282,25 @@ nnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
 vnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
 
 " }}}
+
+" }}}
+
+" Context {{{
+
+if $CONTEXT == "amco"
+  let g:indent_size=4
+  set textwidth=80
+  set expandtab
+elseif $CONTEXT == "amcol"
+  let g:indent_size=4
+  set textwidth=132
+else
+  let g:indent_size=2
+  set textwidth=80
+  set expandtab
+  " Auto-trim whitespace on cpp/h files
+  autocmd FileType c,cpp,h,hpp autocmd BufWritePre <buffer> %s/\s\+$//e
+endif
 
 " }}}
 
@@ -419,15 +410,11 @@ function! Dont_indent_templates()
 endfunction
 
 if has("autocmd")
-  autocmd BufEnter *.{cc,cxx,cpp,h,hh,hpp,hxx} setlocal indentexpr=Dont_indent_templates()
 endif
 
 " }}}
 
 " Markdown {{{
-
-" Markdown spaces
-autocmd BufRead,BufNewFile *.md setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
 
 " }}}
 
@@ -467,6 +454,7 @@ set foldlevel=0
 nnoremap - za
 nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
 
+set nocompatible
 set number
 set encoding=UTF-8
 set timeoutlen=2000
@@ -733,22 +721,21 @@ nnoremap <silent> <Plug>BeforePasta :<C-U>call <SID>NormalPasta('P', 'O')<CR>
 nnoremap <silent> <Plug>AfterPasta :<C-U>call <SID>NormalPasta('p', 'o')<CR>
 xnoremap <silent> <Plug>VisualPasta :<C-U>call <SID>VisualPasta()<CR>
 
-augroup vim_pasta
-  au FileType * call <SID>SetupPasta()
-augroup END
-
 " }}}
 
 " }}}
 
 " Per file {{{
 
+" By using a group in your vimrc file, it becomes safe to reload it.
 augroup SourceCode
+
+  " Clear this group.
   autocmd!
 
-  " Swap lines (needs cosco)
-  autocmd FileType javascript,css,cpp,c,hpp,h nnoremap <leader>sj ddpk:CommaOrSemiColon<cr>
-  autocmd FileType javascript,css,cpp,c,hpp,h nnoremap <leader>sk ddkP:CommaOrSemiColon<cr>
+  autocmd FileType * call <SID>SetupPasta()
+
+  " System tags
   autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/qt5
   autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/system
 
@@ -756,6 +743,12 @@ augroup SourceCode
   autocmd FileType javascript,css,cpp,c,hpp,h setlocal foldmarker={,}
   autocmd FileType sass,html setlocal foldmethod=indent
   autocmd FileType json setlocal foldmethod=syntax
+
+  " Indent
+  autocmd FileType cc,cxx,cpp,h,hh,hpp,hxx setlocal indentexpr=Dont_indent_templates()
+
+  " Markdown spaces
+  autocmd BufRead,BufNewFile *.md setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
 
 augroup SourceCode
 
