@@ -1,4 +1,4 @@
-# Configs {
+# Configs {{{
 
   HISTCONTROL=ignoreboth
   # Show ISO timestamps on history
@@ -32,9 +32,9 @@
   # Set ls colors
   eval $(dircolors -b $HOME/.dotfiles/ls-colors)
 
-# }
+# }}}
 
-# Functions {
+# Functions {{{
 
   function text_color {
     echo "\[\e[38;5;""$1""m\]"
@@ -72,15 +72,15 @@
           [ $success = 1 ] \
           && echo ~/Music/Notifications/StarFox-bombPickup.mp3 \
           || echo ~/Music/Notifications/StarFox-vsDeselect.mp3 \
-        )" &> /dev/null & 
-    ) 
+        )" &> /dev/null &
+    )
   }
 
-# }
+# }}}
 
-# Aliases {
+# Aliases {{{
 
-  # Speed {
+  # Speed {{{
 
     # Perma args
     alias mkd='mkdir -pv'
@@ -94,7 +94,6 @@
     alias ranger='ranger --choosedir=$HOME/.config/ranger/lastrangerdir; LASTDIR=`cat $HOME/.config/ranger/lastrangerdir`; cd "$LASTDIR"'
 
     # Small
-    alias v='vim'
     alias t='tmux'
     alias r='ranger'
     alias sv='sudo vim'
@@ -112,26 +111,29 @@
     alias hat='highlight --out-format=ansi --force'
     alias wip="ip a | grep -E 'inet.*lobal' | awk '{print $2}'"
 
-  # }
+  # }}}
 
-  # Git {
+  # Git {{{
 
     alias gp='git pull'
     alias ga='git add'
     alias gc='git commit -m'
+    alias gr='git reset'
+    alias grh='git reset --hard'
     alias gca='git commit --amend'
     alias gd='git diff'
     alias gdc='git diff --cached'
     alias gs='git status'
     alias gl="git log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+    alias gls="git log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --simplify-by-decoration"
     alias gss='git stash save'
     alias gsp='git stash pop'
     alias gsa='git stash apply'
     alias gssk='git stash save --keep-index'
 
-  # }
+  # }}}
 
-  # Dotfiles {
+  # Dotfiles {{{
 
     alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
     alias dfa='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME add -f'
@@ -140,11 +142,11 @@
     alias dfd='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME diff'
     alias dfl="git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
-  # }
+  # }}}
 
-# }
+# }}}
 
-# export PS1 {
+# export PS1 {{{
 
   BOLD=`text_bold`
   RESET=`text_reset`
@@ -157,4 +159,4 @@
 
   export PS1="$BOLD$GREEN\u$WHITE at $CYAN\h$WHITE in $ORANGE\w$RESET$DARK_GREEN\$(parse_git_branch)\n$WHITE$BOLD\$$RESET "
 
-# }
+# }}}

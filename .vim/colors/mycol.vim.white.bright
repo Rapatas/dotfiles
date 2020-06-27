@@ -40,7 +40,7 @@ hi CursorLineNR     ctermfg=255  ctermbg=none cterm=none
 " Number column
 hi CursorColumn     ctermfg=none ctermbg=202   cterm=none
 hi FoldColumn       ctermfg=none ctermbg=237  cterm=none
-hi SignColumn       ctermfg=none ctermbg=202   cterm=none
+hi SignColumn       ctermfg=none ctermbg=none cterm=none
 hi Folded           ctermfg=none ctermbg=none cterm=none
 
 " Window/Tab delimiters

@@ -24,6 +24,7 @@ super + 3
   ./bin/launcher/launcher.sh Xfce4-terminal xfce4-terminal
 super + 4
 super + 5
+  ./bin/launcher/launcher.sh de.jensd.mqttfx.ui.MQTTFX /opt/MQTTfx/MQTTfx
 super + 6
   ./bin/launcher/launcher.sh Discord /snap/bin/discord
 super + 7
