@@ -95,6 +95,7 @@
 
     # Small
     alias t='tmux'
+    alias v='vim'
     alias r='ranger'
     alias sv='sudo vim'
     alias sr='sudo ranger'

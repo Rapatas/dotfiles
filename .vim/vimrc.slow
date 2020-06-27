@@ -1,4 +1,3 @@
-
 let mapleader = "\<space>"
 
 " Plugins {{{
@@ -7,34 +6,7 @@ let mapleader = "\<space>"
 
 call plug#begin('~/.vim/plugged')
 
-" Git
-Plug 'tpope/vim-fugitive', {'on': []}
-" Plug 'airblade/vim-gitgutter'
-
-" Comments
-Plug 'scrooloose/nerdcommenter', { 'on': [] }
-
-" Navigation
-Plug 'scrooloose/nerdtree', { 'on': [] }
-Plug 'vim-ctrlspace/vim-ctrlspace', { 'on': [] }
-Plug 'junegunn/fzf.vim'
-Plug 'christoomey/vim-tmux-navigator'
-
-" Auto Complete
-Plug 'Valloric/YouCompleteMe', { 'on': [] }
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
-Plug 'vim-scripts/taglist.vim'
-Plug 'xolox/vim-misc'
-
-" Move
-Plug 'Lokaltog/vim-easymotion'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'wikitopian/hardmode'
-
 " Utils
-Plug 'Valloric/ListToggle'
 Plug 'jiangmiao/auto-pairs'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
@@ -44,87 +16,87 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'mileszs/ack.vim'
+Plug 'Valloric/ListToggle'
 Plug 'Konfekt/FastFold'
-Plug 'tpope/vim-unimpaired', { 'on': [] }
+Plug 'tpope/vim-unimpaired'
+Plug 'AndrewRadev/switch.vim'
+" Auto Complete
+Plug 'Valloric/YouCompleteMe'
+" Load YCM only when I try to type something {{{
 
+" Plug 'Valloric/YouCompleteMe', { 'on': [] }
+
+" augroup load_ycm
+"   autocmd!
+"   autocmd! InsertEnter *
+"         \ call plug#load('YouCompleteMe')     |
+"         \ if exists('g:loaded_youcompleteme') |
+"         \   call youcompleteme#Enable()       |
+"         \ endif                               |
+"         \ autocmd! load_ycm
+" augroup END
+
+" }}}
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'vim-scripts/taglist.vim'
+Plug 'xolox/vim-misc'
+" Move
+Plug 'Lokaltog/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'wikitopian/hardmode'
 " Syntax
-" Plug 'cakebaker/scss-syntax.vim'
-" Plug 'ap/vim-css-color'
-" Plug 'peterhoeg/vim-qml'
-" Plug 'baskerville/vim-sxhkdrc'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'ap/vim-css-color'
+Plug 'peterhoeg/vim-qml'
 Plug 'pboettch/vim-cmake-syntax'
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'octol/vim-cpp-enhanced-highlight'
-
 " Visual Candy
-Plug 'itchyny/lightline.vim'
-Plug 'edkolev/tmuxline.vim', {'on': []}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'edkolev/tmuxline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ryanoasis/vim-devicons'
+" Navigation
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf.vim'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'christoomey/vim-tmux-navigator'
+" Comments
+Plug 'scrooloose/nerdcommenter'
+" Git
+Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
 
+" Initialize plugin system
 call plug#end()
-
-function! LoadAsyncPlugins()
-  call plug#load("YouCompleteMe")
-  if exists('g:loaded_youcompleteme')
-    call youcompleteme#Enable()
-  endif
-  call plug#load("nerdcommenter")
-  call plug#load("nerdtree")
-  call plug#load("tmuxline.vim")
-  call plug#load("vim-ctrlspace")
-  call plug#load("vim-fugitive")
-  call plug#load("vim-unimpaired")
-endfunction
-autocmd VimEnter * call timer_start( 0, { tid->execute('call LoadAsyncPlugins()') } )
-
-" Plugged }}}
-  
-" LightLine {{{
-
-"  \ 'colorscheme': 'solarized',
-"  \ 'colorscheme': 'seoul256',
-"  \ 'colorscheme': 'one',
-"  \ 'colorscheme': 'OldHope',
-"  \ 'colorscheme': 'Tomorrow_Night',
-"  \ 'colorscheme': 'deus',
-"  \ 'colorscheme': 'jellybeans',
-"  \ 'colorscheme': '16color',
-
-let g:lightline = {
-  \ 'colorscheme': 'seoul256',
-	\ 'component': {
-	\   'lineinfo': ' %3l:%-2v',
-	\ },
-	\ 'component_function': {
-	\   'readonly': 'LightlineReadonly',
-	\   'fugitive': 'LightlineFugitive'
-	\ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '', 'right': '' }
-	\ }
-function! LightlineReadonly()
-	return &readonly ? '' : ''
-endfunction
-function! LightlineFugitive()
-	if exists('*FugitiveHead')
-		let branch = FugitiveHead()
-		return branch !=# '' ? ''.branch : ''
-	endif
-	return ''
-endfunction
 
 " }}}
 
-" You Complete Me {{{
+" Markdown {{{
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_max_diagnostics_to_display = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_always_populate_location_list = 1
+nnoremap <space>tm :Toc<cr>
+
+" }}}
+
+" Airline {{{
+
+" let g:airline_extensions = []
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_highlighting_cache = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='minimalist'
+" set re=1
+
+" }}}
+
+" Switch {{{
+
+let g:switch_mapping = "<leader>."
 
 " }}}
 
@@ -195,49 +167,44 @@ map <F4> :NERDTreeToggle<CR>
 
 " }}}
 
-" ListToggle {{{
+" You Complete Me (ycm) {{{
 
-let g:lt_location_list_toggle_map = '<leader>tl'
-let g:lt_quickfix_list_toggle_map = '<leader>tq'
-let g:lt_height = 10
+" At least use this config for new projcts
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
-" }}}
+" Stop asking me for confirmation
+let g:ycm_confirm_extra_conf = 0
 
-" Taglist {{{
+" Suggest language keywords
+let g:ycm_seed_identifiers_with_syntax = 1
 
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 50
+" Show all the errors!!!
+let g:ycm_max_diagnostics_to_display = 0
 
-nnoremap <leader>tt :TlistToggle<CR>
-nnoremap <leader>T :TlistHighlightTag<CR>
+" Close the preview window
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
-" }}}
+" let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_complete_in_comments = 1
 
-" fzf {{{
+" Place errors in location list
+" let g:ycm_always_populate_location_list = 1
 
-" Use fzf
-set rtp+=~/.fzf
-
-nnoremap <C-P> :Files<CR>
-
-" }}}
-
-" Multiple cursorrs {{{
-
-nnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
-vnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+nnoremap gd :YcmCompleter GoToDefinition<CR>
+nnoremap gh :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter FixIt<CR>
+nnoremap gt :YcmCompleter GetType<CR>
+nnoremap gr :YcmCompleter GoToReferences<CR>
+" Use <C-]> for ctags.
 
 " }}}
 
-" Fast Fold {{{
+" UltiSnips {{{
 
-nmap zuz <Plug>(FastFoldUpdate)
-" Prevent fold calculation on all foldmethods.
-let g:fastfold_force = 1
-" Trigger fold calculation on save.
-let g:fastfold_savehook = 1
-" Prevent fold calculation on all file sizes.
-let g:fastfold_minlines = 0
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsListSnippets = '<C-l>'
 
 " }}}
 
@@ -258,16 +225,65 @@ set diffopt+=vertical
 
 " }}}
 
-" UltiSnips {{{
+" Fast Fold {{{
 
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-let g:UltiSnipsListSnippets = '<C-l>'
+nmap zuz <Plug>(FastFoldUpdate)
+" Prevent fold calculation on all foldmethods.
+let g:fastfold_force = 1
+" Trigger fold calculation on save.
+let g:fastfold_savehook = 1
+" Prevent fold calculation on all file sizes.
+let g:fastfold_minlines = 0
 
 " }}}
 
-" Plugins }}}
+" Taglist {{{
+
+" Toggle taglist
+let Tlist_Use_Right_Window   = 1
+let Tlist_WinWidth = 50
+
+nnoremap <leader>tt :TlistToggle<CR>
+nnoremap <leader>T :TlistHighlightTag<CR>
+
+let g:lt_location_list_toggle_map = '<leader>tl'
+let g:lt_quickfix_list_toggle_map = '<leader>tq'
+let g:lt_height = 10
+
+" }}}
+
+" Easy Tags {{{
+
+let g:easytags_async = 1
+let g:easytags_opts = ['--fields=+l']
+
+set tags=tags;
+let g:easytags_dynamic_files = 1
+
+" }}}
+
+" fzf {{{
+
+nnoremap <C-P> :Files<CR>
+
+" }}}
+
+" ack {{{
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" }}}
+
+" Multiple cursorrs {{{
+
+nnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+vnoremap <silent> <leader><c-n> :MultipleCursorsFind <C-R>/<CR>
+
+" }}}
+
+" }}}
 
 " Context {{{
 
@@ -393,18 +409,12 @@ function! Dont_indent_templates()
   return ret_val
 endfunction
 
-augroup IndentCpp
-  autocmd FileType cc,cxx,cpp,h,hh,hpp,hxx setlocal indentexpr=Dont_indent_templates()
-augroup END
+if has("autocmd")
+endif
 
 " }}}
 
 " Markdown {{{
-
-  augroup IndentMarkdown
-    " Markdown spaces
-    autocmd BufRead,BufNewFile *.md setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
-  augroup END
 
 " }}}
 
@@ -412,15 +422,13 @@ augroup END
 
 " Colors {{{
 
-" Use 256 colors.
-set t_Co=256
-
 colorscheme mycol
 
 " set colorcolumn=+1
 set colorcolumn=
 
 " Output the current syntax group
+
 function! SynStack ()
     for i1 in synstack(line("."), col("."))
         let i2 = synIDtrans(i1)
@@ -429,25 +437,25 @@ function! SynStack ()
         echo n1 "->" n2
     endfor
 endfunction
+
 nnoremap <F3> :call SynStack()<CR>
 
 " }}}
 
 " General {{{
 
-" Always show status line.
-set laststatus=2
-" Show ruller.
-set number
-" Don't bother showing the current mode.
-set noshowmode
-" SpellChecker
-set spelllang=el,en
-set spell
-" VISUALLY wrap long lines
-set wrap
+" Use fzf
+set rtp+=~/.fzf
+
+" Folding
+set foldmethod=marker
+set foldmarker={{{,}}}
+set foldlevel=0
+nnoremap - za
+nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
 
 set nocompatible
+set number
 set encoding=UTF-8
 set timeoutlen=2000
 set hidden
@@ -466,6 +474,7 @@ set scrolloff=3    " Minumum lines to keep above and below cursor"
 set whichwrap+=<,>,h,l  " Allow backspace and cursor keys to cross line boundaries
 set splitright     " Puts new vsplit windows to the right of the current
 set splitbelow     " Puts new split windows to the bottom of the current
+set t_Co=256       " Use 256 colors"
 set ruler          " Show the ruler
 set showcmd        " Show partial commands in status line and Selected characters/lines in visual mode
 set showmode       " Show current mode in command-line
@@ -474,6 +483,13 @@ set matchtime=5    " Show matching time"
 set report=0       " Always report changed lines
 set linespace=0    " No extra spaces between rows
 set pumheight=30   " Avoid the pop up menu occupying the whole screen"
+
+" SpellChecker
+set spelllang=el,en
+set spell
+
+" VISUALLY wrap long lines
+set wrap
 
 set mouse=a
 " Hide the mouse cursor while typing
@@ -486,52 +502,50 @@ end
 
 " General }}}
 
-" Folding {{{
-
-set foldmethod=marker
-set foldmarker={{{,}}}
-
-" Starting folded makes it slower!
-set foldlevel=99
-
-nnoremap - za
-nnoremap <expr> _ &foldlevel ? 'zM' :'zR'
-
-augroup Folding
-	autocmd!
-	autocmd FileType javascript,css,cpp,c,hpp,h setlocal foldmarker={,}
-  autocmd FileType sass,html setlocal foldmethod=indent
-  autocmd FileType json setlocal foldmethod=syntax
-augroup END
-
-" }}}
-
 " Auto behavior {{{
 
-" Disable automatic comment insertion.
-augroup NoAutoComments
-	" This behavior is because of C file plugin in VIM. Since file plugin
-	" is loaded after loading .vimrc, the settings in .vimrc are
-	" overwritten.
-	autocmd FileType * setlocal formatoptions-=r formatoptions-=c formatoptions-=o
-augroup END
+" auto reload files based on vim and tmux events
+set autoread
+
+" Disable automatic comment insertion
+autocmd FileType * setlocal formatoptions-=r formatoptions-=c formatoptions-=o
+
+" Auto unfold on cursor position when opening file
+if has("folding")
+  function! UnfoldCur()
+    if !&foldenable
+      return
+    endif
+    let cl = line(".")
+    if cl <= 1
+      return
+    endif
+    let cf  = foldlevel(cl)
+    let uf  = foldlevel(cl - 1)
+    let min = (cf > uf ? uf : cf)
+    if min
+      execute "normal!" min . "zo"
+      return 1
+    endif
+  endfunction
+endif
 
 " Restore cursor position when opening same file
-" function! ResCur()
-"   if line("'\"") <= line("$")
-"     normal! g`"
-"     return 1
-"   endif
-" endfunction
-"
-" augroup resCur
-"   autocmd!
-"   if has("folding")
-"     autocmd BufWinEnter * if ResCur() | call UnfoldCur() | endif
-"   else
-"     autocmd BufWinEnter * call ResCur()
-"   endif
-" augroup END
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
+  endif
+endfunction
+
+augroup resCur
+  autocmd!
+  if has("folding")
+    autocmd BufWinEnter * if ResCur() | call UnfoldCur() | endif
+  else
+    autocmd BufWinEnter * call ResCur()
+  endif
+augroup END
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -546,23 +560,101 @@ augroup Binary
 augroup END
 
 " Set markers to the last filetype I visit
-augroup PrevFileMarkers
-  autocmd BufLeave *.cpp,*.c   normal! mC
-  autocmd BufLeave *.h,*.hpp   normal! mH
-  autocmd BufLeave *.md        normal! mM
-  autocmd BufLeave *.txt       normal! mT
-  autocmd BufLeave vimrc,*.vim normal! mV
-augroup END
+autocmd BufLeave *.cpp,*.c   normal! mC
+autocmd BufLeave *.h,*.hpp   normal! mH
+autocmd BufLeave *.md        normal! mM
+autocmd BufLeave *.txt       normal! mT
+autocmd BufLeave vimrc,*.vim normal! mV
 
-augroup SystemTags
-  autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/qt5
-  autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/system
-augroup END
+" Auto behavior }}}
+
+" Custom keybindings {{{
+
+" Navigation {{{
+
+" Split windows with same keys as tmux
+nnoremap <Leader>w= <C-W>v
+nnoremap <Leader>w- <C-W>S
+
+" Same width on all panes
+nnoremap <Leader>w+ <C-W>=
+
+" Window to tab
+nnoremap <silent> <Leader>wt :tab split<CR>
+
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+
+" Treat long lines as break lines (useful when moving around in them)
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
+
+" }}}
+
+nnoremap <CR> :
+
+" " Folding
+" nnoremap <silent> <Leader>f0 :set foldlevel=0<CR>
+" nnoremap <silent> <Leader>f1 :set foldlevel=1<CR>
+" nnoremap <silent> <Leader>f2 :set foldlevel=2<CR>
+" nnoremap <silent> <Leader>f3 :set foldlevel=3<CR>
+" nnoremap <silent> <Leader>f4 :set foldlevel=4<CR>
+" nnoremap <silent> <Leader>f5 :set foldlevel=5<CR>
+" nnoremap <silent> <Leader>f6 :set foldlevel=6<CR>
+" nnoremap <silent> <Leader>f7 :set foldlevel=7<CR>
+" nnoremap <silent> <Leader>f8 :set foldlevel=8<CR>
+" nnoremap <silent> <Leader>f9 :set foldlevel=9<CR>
+
+" Save
+nnoremap <silent> <C-S> :w<CR>
+inoremap <silent> <C-S> <esc>:w<CR>
+vnoremap <silent> <C-S> :w<CR>gv
+
+" Die
+map <C-Q> :qa!<CR>
+
+" Close
+nnoremap <leader>q :bd<cr>
+
+" Quit visual mode
+vnoremap v <Esc>
+
+" Toggle pastemode
+nnoremap <silent> <Leader>tp :setlocal paste!<CR>
+
+" Close preview window
+nnoremap <leader>p :pclose<cr>
+
+" :W sudo saves the file
+command! W w !sudo tee % > /dev/null
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Clear search highlight
+map <leader>/ :noh<cr>
+
+" Use tmux keys for opening splits
+nnoremap <leader>= :vnew<cr>
+nnoremap <leader>- :new<cr>
+
+" Trim whitespace
+nnoremap <leader>dt :%s/\s\+$//e<cr>
 
 " Pasta {{{
 
 " This adjusts indentation of paste text to match the destination.
-"
+
 function! s:NormalPasta(p, o)
   if (getregtype() ==# "V")
     exe "normal! " . a:o . "\<space>\<bs>\<esc>" . v:count1 . '"' . v:register . ']p'
@@ -629,84 +721,35 @@ nnoremap <silent> <Plug>BeforePasta :<C-U>call <SID>NormalPasta('P', 'O')<CR>
 nnoremap <silent> <Plug>AfterPasta :<C-U>call <SID>NormalPasta('p', 'o')<CR>
 xnoremap <silent> <Plug>VisualPasta :<C-U>call <SID>VisualPasta()<CR>
 
-augroup PastaInstaller
+" }}}
+
+" }}}
+
+" Per file {{{
+
+" By using a group in your vimrc file, it becomes safe to reload it.
+augroup SourceCode
+
+  " Clear this group.
   autocmd!
+
   autocmd FileType * call <SID>SetupPasta()
-augroup END
+
+  " System tags
+  autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/qt5
+  autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/system
+
+  " Folding
+  autocmd FileType javascript,css,cpp,c,hpp,h setlocal foldmarker={,}
+  autocmd FileType sass,html setlocal foldmethod=indent
+  autocmd FileType json setlocal foldmethod=syntax
+
+  " Indent
+  autocmd FileType cc,cxx,cpp,h,hh,hpp,hxx setlocal indentexpr=Dont_indent_templates()
+
+  " Markdown spaces
+  autocmd BufRead,BufNewFile *.md setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
+
+augroup SourceCode
 
 " }}}
-
-" Auto behavior }}}
-
-" Custom keybindings {{{
-
-" Navigation {{{
-
-" Same width on all panes
-nnoremap <Leader>w+ <C-W>=
-
-" Window to tab
-nnoremap <silent> <Leader>wt :tab split<CR>
-
-nnoremap <leader>1 1gt
-nnoremap <leader>2 2gt
-nnoremap <leader>3 3gt
-nnoremap <leader>4 4gt
-nnoremap <leader>5 5gt
-nnoremap <leader>6 6gt
-nnoremap <leader>7 7gt
-nnoremap <leader>8 8gt
-nnoremap <leader>9 9gt
-
-" Treat long lines as break lines (useful when moving around in them)
-nmap j gj
-nmap k gk
-vmap j gj
-vmap k gk
-
-" }}}
-
-nnoremap <CR> :
-
-" Save
-nnoremap <silent> <C-S> :w<CR>
-inoremap <silent> <C-S> <esc>:w<CR>
-vnoremap <silent> <C-S> :w<CR>gv
-
-" Die
-map <C-Q> :qa!<CR>
-
-" Close buffer.
-nnoremap <leader>q :bd<cr>
-
-" Quit visual mode.
-vnoremap v <Esc>
-
-" Toggle pastemode
-nnoremap <silent> <Leader>tp :setlocal paste!<CR>
-
-" Close preview window
-nnoremap <leader>p :pclose<cr>
-
-" :W sudo saves the file
-command! W w !sudo tee % > /dev/null
-
-" Visual shifting (does not exit Visual mode).
-vnoremap < <gv
-vnoremap > >gv
-
-" Clear search highlight.
-map <leader>/ :noh<cr>
-
-" Use tmux keys for opening splits.
-nnoremap <leader>= :vnew<cr>
-nnoremap <leader>- :new<cr>
-" Split windows with same keys as tmux
-nnoremap <Leader>w= <C-W>v
-nnoremap <Leader>w- <C-W>S
-
-" Trim whitespace
-nnoremap <leader>dt :%s/\s\+$//e<cr>
-
-" }}}
-
