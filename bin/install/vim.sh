@@ -14,3 +14,5 @@ curl \
 
 vim -c 'PlugInstall' -c 'qa!'
 
+cd ~/.vim/plugged/YouCompleteMe
+./install.py --clangd-completer
