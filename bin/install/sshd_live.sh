@@ -5,18 +5,17 @@ if [ ! -f ~/.ssh/$USER@$HOSTNAME.rsa ]; then
   exit 1
 fi
 
-sudo apt-get openssh-seerver install libpam-google-authenticator fail2ban
+sudo apt-get install -y openssh-server libpam-google-authenticator fail2ban
 
-cd /etc/ssh
-sudo rm ssh_host_*key
-sudo ssh-keygen -t rsa -b 4096 -f ssh_host_rsa_key -N "" < /dev/null
+sudo rm /etc/ssh/ssh_host_*key*
+sudo ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -N "" < /dev/null
 sudo groupadd ssh-user
 
 this_user=$USER
 
 # Run this per user:
 sudo usermod -a -G ssh-user $this_user
-google-authenticator --time-based --disallow-reuse --force --rate-limit=3 --rate-time=30 --minimal-window
+google-authenticator --time-based --disallow-reuse --force --rate-limit=3 --rate-time=30 --minimal-window > /home/$this_user/2fa
 
 echo "
 # Users {{{
@@ -40,8 +39,8 @@ echo "
 
 # Network {{{
 
-AddressFamily inet
-Port 22
+  AddressFamily inet
+  Port 22
 
 # }}}
 
@@ -50,7 +49,6 @@ Port 22
   MaxAuthTries 3
   MaxSessions 3
   AcceptEnv LANG LC_*
-  Banner /etc/issue
   HostbasedAuthentication no
   IgnoreRhosts yes
   IgnoreUserKnownHosts no
@@ -76,7 +74,7 @@ Port 22
   MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,umac-128@openssh.com
 
 # }}}
-" | sudo tee -a /etc/ssh/sshd_config > /dev/null
+" | sudo tee /etc/ssh/sshd_config > /dev/null
 
 # Make PAM ask for google authenticator OTP.
 echo "auth required pam_google_authenticator.so" | sudo tee -a /etc/pam.d/sshd > /dev/null
@@ -92,7 +90,7 @@ echo "
 [Definition]
 loglevel = INFO
 logtarget = /var/log/fail2ban.log
-" | sudo tee -a /etc/fail2ban/fail2ban.local
+" | sudo tee /etc/fail2ban/fail2ban.local
 
 # fail2ban.local }}}
 
@@ -121,7 +119,7 @@ bantime   = 2592000 # 1 mon
 banaction = iptables-multiport
 logpath   = %(sshd_log)s
 backend   = %(sshd_backend)s
-" | sudo tee -a /etc/fail2ban/jail.local
+" | sudo tee /etc/fail2ban/jail.local
 
 # jail.local }}}
 
@@ -181,7 +179,7 @@ ignoreregex =
 maxlines = 1
 journalmatch = _SYSTEMD_UNIT=sshd.service + _COMM=sshd
 datepattern = {^LN-BEG}
-" | sudo tee -a /etc/fail2ban/sshd-aggressive.conf
+" | sudo tee /etc/fail2ban/sshd-aggressive.conf
 
 # sshd-aggressive.conf }}}
 
@@ -218,6 +216,6 @@ ignoreregex =
 maxlines = 1
 journalmatch = _SYSTEMD_UNIT=sshd.service + _COMM=sshd
 datepattern = {^LN-BEG}
-" | sudo tee -a /etc/fail2ban/sshd-basic.conf
+" | sudo tee /etc/fail2ban/sshd-basic.conf
 
 # sshd-basic.conf }}}
