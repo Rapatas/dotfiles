@@ -58,7 +58,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Visual Candy
 Plug 'itchyny/lightline.vim'
-Plug 'edkolev/tmuxline.vim', {'on': []}
+Plug 'edkolev/tmuxline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'ryanoasis/vim-devicons'
 
@@ -71,7 +71,6 @@ function! LoadAsyncPlugins()
   endif
   call plug#load("nerdcommenter")
   call plug#load("nerdtree")
-  call plug#load("tmuxline.vim")
   call plug#load("vim-ctrlspace")
   call plug#load("vim-fugitive")
   call plug#load("vim-unimpaired")
