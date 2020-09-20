@@ -15,3 +15,4 @@ mode=$(\
 
 sudo cp --archive /etc/default/grub /etc/default/grub-COPY-$(date +"%Y%m%d%H%M%S")
 sudo sed -i "s/\(GRUB_CMDLINE_LINUX_DEFAULT=\"\)/\1vga=$mode /" /etc/default/grub
+sudo update-grub2
