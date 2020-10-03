@@ -4,7 +4,7 @@ flags = [
   '-fexceptions',
   '-DNDEBUG',
   '-ferror-limit=0',
-  '-std=c++17',
+  '-std=c++20',
   '-x', 'c++',
   '-isystem', '/usr/include/c++/7',
   '-isystem', '/usr/include',
