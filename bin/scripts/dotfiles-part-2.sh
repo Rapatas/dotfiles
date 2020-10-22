@@ -36,7 +36,7 @@ xargs -a <(sed '/^#.*$/d' ~/.dotfiles/snap-list) sudo snap install
 tmux start-server
 tmux new-session -d
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-tmux new-session "vim -c 'Tmuxline airline' -c 'TmuxlineSnapshot! ~/.tmux/theme_snapshot' -c 'q'"
+tmux new-session "vim -c 'Tmuxline lightline' -c 'TmuxlineSnapshot! ~/.tmux/theme_snapshot' -c 'q'"
 tmux kill-server
 
 #~/bin/scripts/keygen.sh
