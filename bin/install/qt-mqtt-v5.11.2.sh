@@ -2,15 +2,18 @@
 
 command -v qmake >/dev/null 2>&1 || { echo >&2 "Could not find 'qmake' in your \$PATH. Aborting."; exit 1; }
 
-git clone https://github.com/qt/qtmqtt
+cd /dev/shm/
+git clone \
+  --branch v5.11.2 \
+  --depth 1 \
+  https://github.com/qt/qtmqtt
 cd qtmqtt
 
-git checkout v5.11.2
 sed -i "s/|| d->filter == QLatin1Char('#')/|| d->filter == QLatin1String(\"#\")/g" src/mqtt/qmqtttopicfilter.cpp
 sed -i "s/if (level != QLatin1Char('+') && level != topicLevels.at(i))/if (level != QLatin1String(\"+\") \&\& level != topicLevels.at(i))/g" src/mqtt/qmqtttopicfilter.cpp
 
 mkdir build && cd build
-qmake .. 
+qmake ..
 make -j $(nproc)
 sudo make install
 

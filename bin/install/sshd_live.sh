@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # --==[ WHAT!? ]==--
-# sshd: limit to 3 attempts per connection 
+# sshd: limit to 3 attempts per connection
 # google authenticator: limit 3 attempts every 30 seconds
 # fail2ban: correct username: 6 fails, 15min ban (2 groups of sshd failures)
 # fail2ban: wrong username: insta-ban 1 year
 # psad: I have no clue..
-# ufw: limit to 6 attempts every 30s 
+# ufw: limit to 6 attempts every 30s
 
 # TODO:
 # update fail2ban regex
@@ -246,7 +246,7 @@ logpath   = %(sshd_log)s
 backend   = %(sshd_backend)s
 
 # 1 year
-bantime   = 31557600 
+bantime   = 31557600
 ' | sudo tee /etc/fail2ban/jail.d/sshd-hard.local > /dev/null
 
 echo '
@@ -264,7 +264,7 @@ logpath   = %(sshd_log)s
 backend   = %(sshd_backend)s
 
 # 15 min
-bantime   = 900 
+bantime   = 900
 ' | sudo tee /etc/fail2ban/jail.d/sshd-soft.local > /dev/null
 
 echo '
@@ -325,7 +325,7 @@ failregex = %(cmnfailre)s
             <mdre-<mode>>
             %(cfooterre)s
 mode = aggressive
-ignoreregex = 
+ignoreregex =
 maxlines = 1
 journalmatch = _SYSTEMD_UNIT=sshd.service + _COMM=sshd
 datepattern = {^LN-BEG}
@@ -349,8 +349,8 @@ cmnfailre = ^pam_unix\(sshd:auth\):\s+authentication failure;\s*logname=\S*\s*ui
 # ^Failed \b(?!publickey)\S+ for (?P<cond_inv>invalid user )?<F-USER>(?P<cond_user>\S+)|(?(cond_inv)(?:(?! from ).)*?|[^:]+)</F-USER> from <HOST>%(__on_port_opt)s(?: ssh\d*)?(?(cond_user): |(?:(?:(?! from ).)*)$)
 # ^(error: )?maximum authentication attempts exceeded for <F-USER>.*</F-USER> from <HOST>%(__on_port_opt)s(?: ssh\d*)?%(__suff)s$
 mdre-normal =
-mdre-ddos = 
-mdre-extra = 
+mdre-ddos =
+mdre-extra =
 mdre-aggressive = %(mdre-ddos)s
                   %(mdre-extra)s
 cfooterre = ^<F-NOFAIL>Connection from</F-NOFAIL> <HOST>
@@ -358,7 +358,7 @@ failregex = %(cmnfailre)s
             <mdre-<mode>>
             %(cfooterre)s
 mode = normal
-ignoreregex = 
+ignoreregex =
 maxlines = 1
 journalmatch = _SYSTEMD_UNIT=sshd.service + _COMM=sshd
 datepattern = {^LN-BEG}
@@ -408,12 +408,12 @@ sudo cp --archive /etc/ufw/before6.rules /etc/ufw/before6.rules-COPY-$(date +"%Y
 ufwb=$(sudo tail  -2 /etc/ufw/before.rules  | head -1)
 ufwb6=$(sudo tail -2 /etc/ufw/before6.rules | head -1)
 
-if [[ $ufwb != *"'COMMIT'"* ]] ; then 
+if [[ $ufwb != *"'COMMIT'"* ]] ; then
   echo "/etc/ufw/before.rules does not end in COMMIT! Stopping."
   exit 1
 fi
 
-if [[ $ufwb6 != *"'COMMIT'"* ]] ; then 
+if [[ $ufwb6 != *"'COMMIT'"* ]] ; then
   echo "/etc/ufw/before6.rules does not end in COMMIT! Stopping."
   exit 1
 fi
