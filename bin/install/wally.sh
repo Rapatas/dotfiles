@@ -1,6 +1,9 @@
 #!/bin/sh
 
-sudo apt install -y gtk+3.0 webkit2gtk-4.0 libusb-dev
+sudo apt-get install -y \
+  gtk+3.0 \
+  webkit2gtk-4.0 \
+  libusb-dev
 
 echo '
 # Teensy rules for the Ergodox EZ Original / Shine / Glow
@@ -13,7 +16,7 @@ KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", \
     MODE:="0666", \
     SYMLINK+="stm32_dfu"
-' | sudo tee -a /etc/udev/rules.d/50-wally.rules
+' | sudo tee /etc/udev/rules.d/50-wally.rules
 
 wget \
   -O ~/bin/wally \

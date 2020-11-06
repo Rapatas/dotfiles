@@ -9,19 +9,15 @@
   gdebi
   mtools
   lm-sensors
-  etckeeper
   htop
-  docker
 
 # }
 
 # Programming {
 
   valgrind
-  libsfml-dev
   doxygen
   curl
-  g++-8
   graphviz
   build-essential
   highlight
@@ -44,16 +40,16 @@
   autokey-gtk
   gimp
   qbittorrent
-  rofi
   feh
   qrencode
+  remmina
+  inkscape
 
 # }
 
 # CLI {
 
   screenfetch
-  remmina
   thefuck
   unrar
   xdotool
@@ -67,6 +63,8 @@
   sshfs
   redshift-gtk
   libimage-exiftool-perl
+  nmap
+  socat
 
 # }
 

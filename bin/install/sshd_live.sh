@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # --==[ WHAT!? ]==--
-# sshd: limit to 3 attempts per connection 
+# sshd: limit to 3 attempts per connection
 # google authenticator: limit 3 attempts every 30 seconds
 # fail2ban: correct username: 6 fails, 15min ban (2 groups of sshd failures)
 # fail2ban: wrong username: insta-ban 1 year
 # psad: I have no clue..
-# ufw: limit to 6 attempts every 30s 
+# ufw: limit to 6 attempts every 30s
 
 # TODO:
 # update fail2ban regex
@@ -26,15 +26,19 @@ fi
 
 sudo apt-get install -y openssh-server libpam-google-authenticator fail2ban
 
-sudo rm /etc/ssh/ssh_host_*key*
-sudo ssh-keygen -t rsa -b 4096 -f /etc/ssh/ssh_host_rsa_key -N "" < /dev/null
+sudo rm /etc/ssh/ssh_host_*key* || true
+if [ ! -f /etc/ssh/host@$HOSTNAME.rsa ]; then
+  sudo ssh-keygen -t rsa -b 4096 -f /etc/ssh/host@$HOSTNAME.rsa -N "" < /dev/null
+fi
+
 sudo groupadd ssh-user || true
 
 this_user=$USER
-
-# Run this per user:
 sudo usermod -a -G ssh-user $this_user
-google-authenticator --time-based --disallow-reuse --force --rate-limit=3 --rate-time=30 --minimal-window > /home/$this_user/2fa
+
+if [ ! -f ~/.google_authenticator ]; then
+  google-authenticator --time-based --disallow-reuse --force --rate-limit=3 --rate-time=30 --minimal-window
+fi
 
 sudo cp --archive /etc/ssh/sshd_config /etc/ssh/sshd_config-COPY-$(date +"%Y%m%d%H%M%S")
 echo "
@@ -56,7 +60,7 @@ echo "
   ChallengeResponseAuthentication yes
   AuthorizedKeysFile .ssh/authorized_keys
   UsePAM yes
-  HostKey /etc/ssh/ssh_host_rsa_key
+  HostKey /etc/ssh/host@$HOSTNAME.rsa
 
 # }}}
 
@@ -125,7 +129,9 @@ sudo mv /etc/ssh/moduli.tmp /etc/ssh/moduli
 # Backup PAM.
 sudo cp --archive /etc/pam.d/sshd /etc/pam.d/sshd-COPY-$(date +"%Y%m%d%H%M%S")
 # Make PAM ask for google authenticator OTP.
-echo "auth required pam_google_authenticator.so" | sudo tee -a /etc/pam.d/sshd > /dev/null
+if ! $(grep -q pam_google_authenticator /etc/pam.d/sshd); then
+  echo "auth required pam_google_authenticator.so" | sudo tee -a /etc/pam.d/sshd > /dev/null
+fi
 # Make PAM not ask for user's password.
 sudo sed -e '/@include common-auth/s/^/#/' -i /etc/pam.d/sshd
 
@@ -152,36 +158,37 @@ sudo mount -o remount,hidepid=2 /proc
 # Setup unattended upgrades. {{{
 
 sudo apt-get install -y unattended-upgrades apt-listchanges
+
+# Only allow security updates.
+sudo cp --archive /etc/apt/apt.conf.d/50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades-COPY-$(date +"%Y%m%d%H%M%S")
+sudo sed 's/\("${distro_id}:${distro_codename}";\)$/\/\/\1         # commented by $(whoami) on $(date +"%Y-%m-%d @ %H:%M:%S")/g' /etc/apt/apt.conf.d/50unattended-upgrades
+sudo sed 's/\("${distro_id}ESM:${distro_codename}";\)$/\/\/\1      # commented by $(whoami) on $(date +"%Y-%m-%d @ %H:%M:%S")/g' /etc/apt/apt.conf.d/50unattended-upgrades
+
 echo "
 // Enable the update/upgrade script (0=disable)
 APT::Periodic::Enable "1";
 
+// Run the "unattended-upgrade" security upgrade script
+// every n-days (0=disabled)
+// Requires the package "unattended-upgrades" and will write
+// a log in /var/log/unattended-upgrades
+APT::Periodic::Unattended-Upgrade "1";
+
 // Do "apt-get update" automatically every n-days (0=disable)
 APT::Periodic::Update-Package-Lists "1";
 
-// Do "apt-get upgrade --download-only" every n-days (0=disable)
-APT::Periodic::Download-Upgradeable-Packages "1";
-
 // Do "apt-get autoclean" every n-days (0=disable)
 APT::Periodic::AutocleanInterval "7";
+
+// Do "apt-get upgrade --download-only" every n-days (0=disable)
+APT::Periodic::Download-Upgradeable-Packages "1";
 
 // Send report mail to root
 //     0:  no report             (or null string)
 //     1:  progress report       (actually any string)
 //     2:  + command outputs     (remove -qq, remove 2>/dev/null, add -d)
-//     3:  + trace on    APT::Periodic::Verbose "2";
-APT::Periodic::Unattended-Upgrade "0";
-
-// Automatically upgrade packages from these
-Unattended-Upgrade::Origins-Pattern {
-      "o=Debian,a=stable";
-      "o=Debian,a=stable-updates";
-      "origin=Debian,codename=${distro_codename},label=Debian-Security";
-};
-
-// You can specify your own packages to NOT automatically upgrade here
-Unattended-Upgrade::Package-Blacklist {
-};
+//     3:  + trace on
+APT::Periodic::Verbose "0";
 
 // Run dpkg --force-confold --configure -a if a unclean dpkg state is detected to true to ensure that updates get installed even when the system got interrupted during a previous run
 Unattended-Upgrade::AutoFixInterruptedDpkg "true";
@@ -198,10 +205,9 @@ Unattended-Upgrade::Remove-New-Unused-Dependencies "true";
 // Automatically reboot WITHOUT CONFIRMATION if the file /var/run/reboot-required is found after the upgrade.
 Unattended-Upgrade::Automatic-Reboot "true";
 
-// Automatically reboot even if users are logged in.
+// DO not automatically reboot if users are logged in.
 Unattended-Upgrade::Automatic-Reboot-WithUsers "false";
 " | sudo tee /etc/apt/apt.conf.d/51myunattended-upgrades > /dev/null
-sudo unattended-upgrade -d --dry-run
 
 # }}}
 
@@ -240,7 +246,7 @@ logpath   = %(sshd_log)s
 backend   = %(sshd_backend)s
 
 # 1 year
-bantime   = 31557600 
+bantime   = 31557600
 ' | sudo tee /etc/fail2ban/jail.d/sshd-hard.local > /dev/null
 
 echo '
@@ -258,7 +264,7 @@ logpath   = %(sshd_log)s
 backend   = %(sshd_backend)s
 
 # 15 min
-bantime   = 900 
+bantime   = 900
 ' | sudo tee /etc/fail2ban/jail.d/sshd-soft.local > /dev/null
 
 echo '
@@ -319,7 +325,7 @@ failregex = %(cmnfailre)s
             <mdre-<mode>>
             %(cfooterre)s
 mode = aggressive
-ignoreregex = 
+ignoreregex =
 maxlines = 1
 journalmatch = _SYSTEMD_UNIT=sshd.service + _COMM=sshd
 datepattern = {^LN-BEG}
@@ -343,8 +349,8 @@ cmnfailre = ^pam_unix\(sshd:auth\):\s+authentication failure;\s*logname=\S*\s*ui
 # ^Failed \b(?!publickey)\S+ for (?P<cond_inv>invalid user )?<F-USER>(?P<cond_user>\S+)|(?(cond_inv)(?:(?! from ).)*?|[^:]+)</F-USER> from <HOST>%(__on_port_opt)s(?: ssh\d*)?(?(cond_user): |(?:(?:(?! from ).)*)$)
 # ^(error: )?maximum authentication attempts exceeded for <F-USER>.*</F-USER> from <HOST>%(__on_port_opt)s(?: ssh\d*)?%(__suff)s$
 mdre-normal =
-mdre-ddos = 
-mdre-extra = 
+mdre-ddos =
+mdre-extra =
 mdre-aggressive = %(mdre-ddos)s
                   %(mdre-extra)s
 cfooterre = ^<F-NOFAIL>Connection from</F-NOFAIL> <HOST>
@@ -352,7 +358,7 @@ failregex = %(cmnfailre)s
             <mdre-<mode>>
             %(cfooterre)s
 mode = normal
-ignoreregex = 
+ignoreregex =
 maxlines = 1
 journalmatch = _SYSTEMD_UNIT=sshd.service + _COMM=sshd
 datepattern = {^LN-BEG}
@@ -363,8 +369,8 @@ datepattern = {^LN-BEG}
 sudo systemctl restart fail2ban
 sudo fail2ban-client start
 sudo fail2ban-client reload
-sudo fail2ban-client add sshd-soft # || true ?
-sudo fail2ban-client add sshd-hard # || true ?
+sudo fail2ban-client add sshd-soft || true
+sudo fail2ban-client add sshd-hard || true
 sudo fail2ban-client status
 
 # }}}
@@ -372,8 +378,6 @@ sudo fail2ban-client status
 # Firewall {{{
 
 sudo apt-get install -y ufw
-sudo ufw default deny outgoing comment 'deny all outgoing traffic'
-sudo ufw default deny incoming comment 'deny all incoming traffic'
 
 sudo ufw limit in  ssh   comment 'allow in SSH'
 # sudo ufw allow in  1883  comment 'allow in MQTT'
@@ -383,11 +387,13 @@ sudo ufw allow out 123   comment 'allow out NTP'
 sudo ufw allow out http  comment 'allow out HTTP'
 sudo ufw allow out https comment 'allow out HTTPS'
 # sudo ufw allow out 1883  comment 'allow out MQTT'
-# sudo ufw limit out ssh   comment 'allow out SSH'
+sudo ufw limit out ssh   comment 'allow out SSH'
 
-sudo ufw enable
+sudo ufw --force enable
 
 # }}}
+
+exit 0
 
 # Port Scanning Attack Detector (PSAD) {{{
 
@@ -402,12 +408,12 @@ sudo cp --archive /etc/ufw/before6.rules /etc/ufw/before6.rules-COPY-$(date +"%Y
 ufwb=$(sudo tail  -2 /etc/ufw/before.rules  | head -1)
 ufwb6=$(sudo tail -2 /etc/ufw/before6.rules | head -1)
 
-if [[ $ufwb != *"'COMMIT'"* ]] ; then 
+if [[ $ufwb != *"'COMMIT'"* ]] ; then
   echo "/etc/ufw/before.rules does not end in COMMIT! Stopping."
   exit 1
 fi
 
-if [[ $ufwb6 != *"'COMMIT'"* ]] ; then 
+if [[ $ufwb6 != *"'COMMIT'"* ]] ; then
   echo "/etc/ufw/before6.rules does not end in COMMIT! Stopping."
   exit 1
 fi

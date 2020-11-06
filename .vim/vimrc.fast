@@ -124,6 +124,10 @@ let g:ycm_max_diagnostics_to_display = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_always_populate_location_list = 1
+let g:ycm_auto_hover = ''
+nnoremap <C-e> :YcmCompleter GetDoc<cr>
+inoremap <C-e> <esc>:YcmCompleter GetDoc<cr>i
+vnoremap <C-e> :YcmCompleter GetDoc<cr>
 
 " }}}
 
@@ -685,7 +689,7 @@ vnoremap v <Esc>
 nnoremap <silent> <Leader>tp :setlocal paste!<CR>
 
 " Close preview window
-nnoremap <leader>p :pclose<cr>
+nnoremap <c-c> :pclose<cr>
 
 " :W sudo saves the file
 command! W w !sudo tee % > /dev/null
