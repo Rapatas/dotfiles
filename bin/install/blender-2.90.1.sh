@@ -19,6 +19,7 @@ Icon=/opt/blender-2.90.1-linux64/blender.svg
 StartupNotify=true
 Terminal=false
 Type=Application
+Categories=Graphics
 Version=1.0
 ' | sudo tee /usr/share/applications/blender.desktop
 

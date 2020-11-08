@@ -16,14 +16,20 @@ KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", MODE:
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", \
     MODE:="0666", \
     SYMLINK+="stm32_dfu"
-' | sudo tee /etc/udev/rules.d/50-wally.rules
+' | sudo tee /etc/udev/rules.d/50-wally.rules > /dev/null
+
+mkdir -p $HOME/bin/ext/wally/
 
 wget \
-  -O ~/bin/wally \
+  -O ~/bin/ext/wally/wally \
   --no-check-certificate \
   https://configure.ergodox-ez.com/wally/linux
 
-chmod +x ~/bin/wally
+wget \
+  -O $HOME/bin/ext/wally/wally.png \
+  https://raw.githubusercontent.com/zsa/wally/master/frontend/src/images/icon.png
+
+chmod +x ~/bin/ext/wally/wally
 
 mkdir -p ~/.local/share/applications
 
@@ -33,7 +39,10 @@ Encoding=UTF-8
 Version=1.0
 Type=Application
 Terminal=false
-Exec=$HOME/bin/wally
-Name=Wally - Ergodox EZ
+Exec=$HOME/bin/ext/wally/wally
+Name=Wally
+Icon=$HOME/bin/ext/wally/wally.png
+Comment=EZ Flash Tool
+Categories=System
 " > ~/.local/share/applications/wally.desktop
 
