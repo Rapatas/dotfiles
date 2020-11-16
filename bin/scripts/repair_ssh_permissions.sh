@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cd
-mkdir ~/.ssh
+mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 touch ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/*
