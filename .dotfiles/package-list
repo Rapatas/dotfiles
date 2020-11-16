@@ -65,6 +65,7 @@
   libimage-exiftool-perl
   nmap
   socat
+  pv
 
 # }
 
