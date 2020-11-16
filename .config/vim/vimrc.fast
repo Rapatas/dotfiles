@@ -1,3 +1,9 @@
+set undodir=$XDG_DATA_HOME/vim/undo//,.
+set directory=$XDG_DATA_HOME/vim/swap//,.
+set backupdir=$XDG_DATA_HOME/vim/backup//,.
+set viewdir=$XDG_DATA_HOME/vim/view//,.
+set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 
 let mapleader = "\<space>"
 
@@ -5,7 +11,7 @@ let mapleader = "\<space>"
 
 " Plugged {{{
 
-call plug#begin('~/.vim/plugged')
+call plug#begin("$XDG_CONFIG_HOME/vim/plugged")
 
 " Git
 Plug 'tpope/vim-fugitive', {'on': []}
@@ -21,7 +27,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Auto Complete
-Plug 'Valloric/YouCompleteMe', { 'on': [] }
+Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe', { 'on': [] }
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'vim-scripts/taglist.vim'
@@ -65,10 +72,10 @@ Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 function! LoadAsyncPlugins()
-  call plug#load("YouCompleteMe")
-  if exists('g:loaded_youcompleteme')
-    call youcompleteme#Enable()
-  endif
+  " call plug#load("YouCompleteMe")
+  " if exists('g:loaded_youcompleteme')
+  "   call youcompleteme#Enable()
+  " endif
   call plug#load("nerdcommenter")
   call plug#load("nerdtree")
   call plug#load("vim-ctrlspace")
@@ -455,7 +462,6 @@ set encoding=UTF-8
 set timeoutlen=2000
 set hidden
 set ttimeoutlen=0
-set viminfo+=n~/.vim/viminfo
 set norelativenumber
 syntax sync minlines=10000
 set synmaxcol=0
