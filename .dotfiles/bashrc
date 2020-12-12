@@ -8,7 +8,7 @@
   export HISTSIZE=
   export HISTTIMEFORMAT="[%F %T] "
   # Change the file location because certain bash sessions truncate .bash_history file upon close.
-  export HISTFILE=~/.bash_eternal_history
+  export HISTFILE=$XDG_DATA_HOME/bash/bash_eternal_history
   # Force prompt to write history after every command.
   PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
   # When the shell exits, append to the history file instead of overwriting it
@@ -70,8 +70,8 @@
       play \
         -q "$( \
           [ $success = 1 ] \
-          && echo ~/Music/Notifications/StarFox-bombPickup.mp3 \
-          || echo ~/Music/Notifications/StarFox-vsDeselect.mp3 \
+          && echo ~/.local/share/notifications/StarFox-bombPickup.mp3 \
+          || echo ~/.local/share/notifications/StarFox-vsDeselect.mp3 \
         )" &> /dev/null &
     )
   }

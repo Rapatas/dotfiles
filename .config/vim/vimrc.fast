@@ -1,8 +1,9 @@
+let skip_defaults_vim=1
 set undodir=$XDG_DATA_HOME/vim/undo//,.
 set directory=$XDG_DATA_HOME/vim/swap//,.
 set backupdir=$XDG_DATA_HOME/vim/backup//,.
 set viewdir=$XDG_DATA_HOME/vim/view//,.
-set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+set viminfo='1000,n$XDG_DATA_HOME/vim/viminfo
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 
 let mapleader = "\<space>"
@@ -62,6 +63,7 @@ Plug 'tpope/vim-unimpaired', { 'on': [] }
 Plug 'pboettch/vim-cmake-syntax'
 Plug 'plasticboy/vim-markdown'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'rodjek/vim-puppet'
 
 " Visual Candy
 Plug 'itchyny/lightline.vim'
@@ -199,6 +201,7 @@ let g:NERDTreeMapJumpNextSibling='J'
 let g:NERDTreeMapJumpPrevSibling='K'
 let g:NERDTreeMapOpenVSplit='v'
 let g:NERDTreeMapOpenSplit='h'
+let g:NERDTreeBookmarksFile='$XDG_CONFIG_HOME/vim/NERDTreeBookmarks'
 
 map <leader>tf :NERDTreeFind<CR>
 map <F4> :NERDTreeToggle<CR>
@@ -566,6 +569,11 @@ augroup END
 augroup SystemTags
   autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/qt5
   autocmd FileType javascript,css,cpp,c,hpp,h setlocal tags+=~/.vim/tags/system
+augroup END
+
+augroup IptablesSyntax
+  autocmd BufRead *.iptables set ft=iptables 
+  autocmd BufRead *.iptables set commentstring=#%s 
 augroup END
 
 " Pasta {{{

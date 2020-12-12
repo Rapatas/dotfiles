@@ -51,6 +51,7 @@
       <property name="names-visible" type="array">
         <value type="string" value="thunar"/>
         <value type="string" value="vlc"/>
+        <value type="string" value="redshift-gtk"/>
         <value type="string" value="system-config-printer"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="autokey-gtk"/>
@@ -59,12 +60,16 @@
         <value type="string" value="network"/>
         <value type="string" value="gigolo"/>
         <value type="string" value="task manager"/>
+        <value type="string" value="steam"/>
         <value type="string" value="workrave tray icon"/>
         <value type="string" value="blueman-applet"/>
+        <value type="string" value="discord"/>
         <value type="string" value="update-notifier"/>
+        <value type="string" value="skypeforlinux"/>
         <value type="string" value="workrave"/>
         <value type="string" value="anydesk"/>
         <value type="string" value="slack"/>
+        <value type="string" value="apprun.wrapped"/>
         <value type="string" value="remmina"/>
         <value type="string" value="ulauncher"/>
       </property>
@@ -89,7 +94,7 @@
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="enable-mpris" type="bool" value="true"/>
       <property name="mixer-command" type="string" value="pavucontrol"/>
-      <property name="mpris-players" type="string" value="parole;spotify;vlc"/>
+      <property name="mpris-players" type="string" value="firefox.instance10456;firefox.instance11166;firefox.instance15947;firefox.instance18929;firefox.instance21238;firefox.instance25728;firefox.instance2668;firefox.instance2672;firefox.instance2711;firefox.instance2726;firefox.instance2789;firefox.instance2806;firefox.instance2973;firefox.instance30072;firefox.instance3036;firefox.instance3602;firefox.instance3958;firefox.instance4005;firefox.instance4260;firefox.instance4341;firefox.instance4345;firefox.instance4662;firefox.instance4749;firefox.instance4835;firefox.instance5005;firefox.instance5053;firefox.instance5320;firefox.instance5614;firefox.instance5873;firefox.instance6118;firefox.instance6493;firefox.instance6557;firefox.instance7229;firefox.instance7761;firefox.instance9404;parole;spotify;vlc"/>
       <property name="show-notifications" type="bool" value="true"/>
     </property>
     <property name="plugin-10" type="string" value="separator">

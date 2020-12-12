@@ -1,0 +1,5 @@
+[user]
+	email = a.rapatas@amco.gr
+	name = Andreas Rapatas
+[commit]
+	gpgsign = true

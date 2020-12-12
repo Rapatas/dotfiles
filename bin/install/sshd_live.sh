@@ -379,7 +379,7 @@ sudo fail2ban-client status
 
 sudo apt-get install -y ufw
 
-sudo ufw limit in  ssh   comment 'allow in SSH'
+sudo ufw limit in ssh comment 'allow in SSH'
 # sudo ufw allow in  1883  comment 'allow in MQTT'
 
 sudo ufw allow out 53    comment 'allow out DNS'

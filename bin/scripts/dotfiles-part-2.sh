@@ -4,8 +4,36 @@
 dotfiles config user.name "Andy Rapatas"
 dotfiles config user.email "15367779+Rapatas@users.noreply.github.com"
 
+# Setup bash to use XDG paths.
+echo '
+confdir=\${XDG_CONFIG_HOME:-\$HOME/.config}/bash
+[ -d "$confdir" ] && [ "\$0" = "bash" ] && source "\$confdir"/bashrc
+unset confdir
+' | sudo tee /etc/profile.d/bash_in_xdg_config_home.sh > /dev/null
+
+echo '
+confdir=\${XDG_CONFIG_HOME:-\$HOME/.config}/bash
+[ -d "$confdir" ] && [ "\$0" = "bash" ] && source "\$confdir"/bash_logout
+unset confdir
+' | sudo tee /etc/bash.bash_logout > /dev/null
+
+if ! $(grep -q '.config/bash/bashrc' /etc/bash.bashrc); then
+  echo '[ -f $HOME/.config/bash/bashrc ] && source $HOME/.config/bash/bashrc' \
+    | sudo tee -a /etc/bash.bashrc
+fi
+
+mkdir -p $XDG_DATA_HOME/bash
+mkdir -p $HOME/.config/bash
+mv ~/.bashrc $HOME/.config/bash/bashrc
+
+sudo sed -i 's/^\(USERXSESSION=\).*$/\1\$XDG_CACHE_HOME\/X11\/xsession/g'      /etc/X11/Xsession
+sudo sed -i 's/^\(USERXSESSIONRC=\).*$/\1\$XDG_CACHE_HOME\/X11\/xsessionrc/g'  /etc/X11/Xsession
+sudo sed -i 's/^\(ALTUSERXSESSION=\).*$/\1\$XDG_CACHE_HOME\/X11\/xresources/g' /etc/X11/Xsession
+sudo sed -i 's/^\(ERRFILE=\).*$/\1\$XDG_CACHE_HOME\/X11\/xsession-errors/g'    /etc/X11/Xsession
+sudo sed -i 's/^\(USRRESOURCES=\).*$/\1\$XDG_CONFIG_HOME\/X11\/xresources/g'   /etc/X11/Xsession
+
 # Delete hist commands from .bashrc
-sed -i '/HISTSIZE=\|HISTFILESIZE=\|HISTCONTROL=/d' ~/.bashrc
+sed -i '/HISTSIZE=\|HISTFILESIZE=\|HISTCONTROL=/d' $HOME/.config/bash/bashrc
 
 # Extend sudo timeout so it can last while the next apt is running
 sudo sh -c "echo \"Defaults timestamp_timeout=120\" > /etc/sudoers.d/timeout"

@@ -17,4 +17,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 # De-clutter the home dir.
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export LESSHISTFILE="${XDG_CONFIG_HOME}/less/history"
+export LESSKEY="${XDG_CONFIG_HOME}/less/keys"
+export ICEAUTHORITY=${XDG_CACHE_HOME}/ICEauthority
 xrdb -load "$XDG_CONFIG_HOME/X11/xresources"

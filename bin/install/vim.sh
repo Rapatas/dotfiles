@@ -6,6 +6,7 @@ sudo apt-get install -y \
   python-dev \
   python3-dev \
   g++-8
+
 sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
 curl \
@@ -17,4 +18,8 @@ curl \
 vim -c 'PlugInstall' -c 'qa!'
 
 cd ~/.vim/plugged/YouCompleteMe
+
+# If you installed llvm manually using the provided script, run 
+# `./install.py --clang-completer --system-libclang` instead
+# Skip the wget command
 ./install.py --clangd-completer
