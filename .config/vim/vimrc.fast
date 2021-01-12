@@ -265,8 +265,8 @@ map <leader>a <Plug>(EasyAlign)
 
 " nmap <c-g> :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
-vnoremap gp :diffput<CR>
-vnoremap gg :diffget<CR>
+" vnoremap gp :diffput<CR>
+" vnoremap gg :diffget<CR>
 
 set diffopt+=vertical
 
